@@ -7,3 +7,9 @@
     padding: 25px 22px;
   }
 }
+
+@media screen and (max-height: 425px) {
+  .popup__profile-edit {
+    padding: 9px 36px 5px;
+  }
+}

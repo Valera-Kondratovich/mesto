@@ -8,6 +8,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media screen and (max-width: 630px) {
+  .popup__title {
+    font-size: 23px;
+  }
+}
+
 @media screen and (max-width: 500px) {
   .popup__title {
     font-size: 22px;
@@ -17,5 +23,11 @@
 @media screen and (max-width: 450px) {
   .popup__title {
     font-size: 18px;
+  }
+}
+
+@media screen and (max-height: 425px) {
+  .popup__title {
+    margin: 0 0 24px;
   }
 }
