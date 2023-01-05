@@ -5,9 +5,12 @@
   font-weight: 500;
   color: #fff;
   margin: 0 0 8px;
+  -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @media screen and (max-width: 725px) {

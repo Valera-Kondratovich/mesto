@@ -1,8 +1,17 @@
 .profile__wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
   justify-content: start;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
   align-items: flex-start;
+  -webkit-column-gap: 14px;
+  -moz-column-gap: 14px;
   column-gap: 14px;
+  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 

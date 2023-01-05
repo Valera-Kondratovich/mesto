@@ -4,6 +4,8 @@
   font-size: 18px;
   line-height: 1.22;
   color: #545454;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @media screen and (max-width: 450px) {

@@ -1,5 +1,6 @@
 .elements__img {
   width: 100%;
+  -o-object-fit: cover;
   object-fit: cover;
   border-radius: 10px 10px 0 0;
 }

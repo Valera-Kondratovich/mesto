@@ -4,6 +4,7 @@
   grid-template-rows: repeat(2, 1fr);
   gap: 20px 17px;
   grid-auto-columns: minmax(200px, 282px);
+  -webkit-box-pack: center;
   justify-content: center;
 }
 
