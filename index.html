@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Русские места</title>
+</head>
+
+<body class="page">
+  <header class="header header_position_center">
+    <img class="logo" src="./images/logo.svg" alt="логотип">
+  </header>
+
+  <main class="content content_position_center">
+    <section class="profile content__profile">
+      <img class="profile__avatar" src="./images/kusto.jpg" alt="аватар">
+      <div class="profile__wrap">
+        <div class="profile__info">
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <p class="profile__description">Исследователь океана</p>
+        </div>
+        <button class="profile__button-edit"></button>
+      </div>
+      <button class="profile__button-add" type="button"></button>
+    </section>
+    <section class="elements">
+      <div class="elements__element">
+        <img class="elements__img" src="./images/karachaevo.jpg" alt="Среди гор стоит старый каменный храм">
+        <div class="elements__group">
+          <p class="elements__title">Карачаевск</p>
+          <img class="elements__like" src="./images/like.svg" alt="лайк">
+        </div>
+      </div>
+      <div class="elements__element">
+        <img class="elements__img" src="./images/elbrus.jpg" alt="На закате в далее виднееться вершина Эльбруса">
+        <div class="elements__group">
+          <p class="elements__title">Гора Эльбрус</p>
+          <img class="elements__like" src="./images/like.svg" alt="лайк">
+        </div>
+      </div>
+      <div class="elements__element">
+        <img class="elements__img" src="./images/dombai.jpg" alt="По середине горных сопок возвышается вверх пик горы">
+        <div class="elements__group">
+          <p class="elements__title">Домбай</p>
+          <img class="elements__like" src="./images/like.svg" alt="лайк">
+        </div>
+      </div>
+      <div class="elements__element">
+        <img class="elements__img" src="./images/altai.jpg"
+          alt="На переднем плане зеленный алтайский луг, по середине течет спокойно речка, на заднем плане виднеется заснеженная гора">
+        <div class="elements__group">
+          <p class="elements__title">Алтай</p>
+          <img class="elements__like" src="./images/like.svg" alt="лайк">
+        </div>
+      </div>
+      <div class="elements__element">
+        <img class="elements__img" src="./images/kazan.jpg" alt="по середине площади стоит большая красивая мечеть">
+        <div class="elements__group">
+          <p class="elements__title">Казань</p>
+          <img class="elements__like" src="./images/like.svg" alt="лайк">
+        </div>
+      </div>
+      <div class="elements__element">
+        <img class="elements__img" src="./images/rybachy.jpg"
+          alt="Красивая осенняя природа, по середине с верху вниз среди холмов течет река">
+        <div class="elements__group">
+          <p class="elements__title">Полуостров Рыбачий</p>
+          <img class="elements__like" src="./images/like.svg" alt="лайк">
+        </div>
+      </div>
+    </section>
+    <footer class="footer footer_margin">&#169; 2022 Mesto Russia</footer>
+  </main>
+  <div class="popup">
+    <div class="popup__body">
+      <img class="popup__button-close" src="./images/close.svg" alt="кнопка закрытия попап окна">
+      <div class="popup__content">
+        <form class="popup__profile-edit">
+          <p class="popup__title">Редактировать профиль</p>
+          <input class="popup__user-name" type="text" name="firstname" placeholder="Введите Ваше Имя" required>
+          <input class="popup__user-description" type="text" name="description"
+            placeholder="Опишите Ваш род деятельности">
+          <button class="popup__button-save" type="button">Сохранить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="./scripts/script.js"></script>
+</body>
+
+</html>

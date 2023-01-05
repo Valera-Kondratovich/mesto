@@ -1,0 +1,43 @@
+@import url(../vendor/normalize.css);
+/* ------fonts------ */
+@import url(../vendor/fonts.css);
+/* ------page----- */
+@import url(../bloks/page/page.css);
+/* -----секция header-------*/
+@import url(../bloks/header/header.css);
+@import url(../bloks/header/_position/header_position_center.css);
+@import url(../bloks/logo/logo.css);
+/* -----секция content-------*/
+@import url(../bloks/content/content.css);
+@import url(../bloks/content/_position/content_position_center.css);
+@import url(../bloks/content/__profile/content__profile.css);
+/* -----секция profile-------*/
+@import url(../bloks/profile/profile.css);
+@import url(../bloks/profile/__avatar/profile__avatar.css);
+@import url(../bloks/profile/__wrap/profile__wrap.css);
+@import url(../bloks/profile/__info/profile__info.css);
+@import url(../bloks/profile/__name/profile__name.css);
+@import url(../bloks/profile/__description/profile__description.css);
+@import url(../bloks/profile/__button-edit/profile__button-edit.css);
+@import url(../bloks/profile/__button-add/profile__button-add.css);
+/* -----секция elements-------*/
+@import url(../bloks/elements/elements.css);
+@import url(../bloks/elements/__element/elements__element.css);
+@import url(../bloks/elements/__img/elements__img.css);
+@import url(../bloks/elements/__group/elements__group.css);
+@import url(../bloks/elements/__title/elements__title.css);
+@import url(../bloks/elements/__like/elements__like.css);
+/* -----секция footer-------*/
+@import url(../bloks/footer/footer.css);
+@import url(../bloks/footer/_margin/footer_margin.css);
+/* -----секция popup-------*/
+@import url(../bloks/popup/popup.css);
+@import url(../bloks/popup/_visible/popup_visible.css);
+@import url(../bloks/popup/__body/popup__body.css);
+@import url(../bloks/popup/__button-close/popup__button-close.css);
+@import url(../bloks/popup/__content/popup__content.css);
+@import url(../bloks/popup/__profile-edit/popup__profile-edit.css);
+@import url(../bloks/popup/__title/popup__title.css);
+@import url(../bloks/popup/__user-name/popup__user-name.css);
+@import url(../bloks/popup/__user-description/popup__user-description.css);
+@import url(../bloks/popup/__button-save/popup__button-save.css);

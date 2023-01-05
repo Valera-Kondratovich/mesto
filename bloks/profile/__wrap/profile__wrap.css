@@ -1,0 +1,14 @@
+.profile__wrap {
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+  column-gap: 14px;
+  flex-shrink: 0;
+}
+
+@media screen and (max-width: 450px) {
+  .profile__wrap {
+    column-gap: 9px;
+    padding-left: 28px;
+  }
+}

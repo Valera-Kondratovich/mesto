@@ -1,0 +1,8 @@
+.elements__like {
+  opacity: 1;
+  transition: opacity .2s linear;
+}
+
+.elements__like:hover {
+  opacity: .5;
+}

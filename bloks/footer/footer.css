@@ -1,0 +1,13 @@
+.footer {
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.22;
+  color: #545454;
+}
+
+@media screen and (max-width: 450px) {
+  .footer {
+    font-size: 14px;
+  }
+}
