@@ -5,11 +5,9 @@
 @import url(../bloks/page/page.css);
 /* -----секция header-------*/
 @import url(../bloks/header/header.css);
-@import url(../bloks/header/_position/header_position_center.css);
 @import url(../bloks/logo/logo.css);
 /* -----секция content-------*/
 @import url(../bloks/content/content.css);
-@import url(../bloks/content/_position/content_position_center.css);
 @import url(../bloks/content/__profile/content__profile.css);
 /* -----секция profile-------*/
 @import url(../bloks/profile/profile.css);
@@ -26,10 +24,9 @@
 @import url(../bloks/elements/__img/elements__img.css);
 @import url(../bloks/elements/__group/elements__group.css);
 @import url(../bloks/elements/__title/elements__title.css);
-@import url(../bloks/elements/__like/elements__like.css);
+@import url(../bloks/elements/__button-like/elements__button-like.css);
 /* -----секция footer-------*/
 @import url(../bloks/footer/footer.css);
-@import url(../bloks/footer/_margin/footer_margin.css);
 /* -----секция popup-------*/
 @import url(../bloks/popup/popup.css);
 @import url(../bloks/popup/_visible/popup_visible.css);
@@ -38,6 +35,5 @@
 @import url(../bloks/popup/__content/popup__content.css);
 @import url(../bloks/popup/__profile-edit/popup__profile-edit.css);
 @import url(../bloks/popup/__title/popup__title.css);
-@import url(../bloks/popup/__user-name/popup__user-name.css);
-@import url(../bloks/popup/__user-description/popup__user-description.css);
+@import url(../bloks/popup/__user/popup__user.css);
 @import url(../bloks/popup/__button-save/popup__button-save.css);

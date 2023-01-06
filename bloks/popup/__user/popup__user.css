@@ -1,4 +1,4 @@
-.popup__user-description {
+.popup__user {
   display: block;
   width: 100%;
   border: 0;
@@ -12,6 +12,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.popup__user-description:focus {
+.popup__user:focus {
   outline-color: #0099eb;
 }

@@ -17,3 +17,9 @@
     font-size: 20px;
   }
 }
+
+@media screen and (max-width: 450px) {
+  .elements__title {
+    font-size: 24px;
+  }
+}

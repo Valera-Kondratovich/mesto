@@ -4,3 +4,9 @@
   -o-object-fit: cover;
   object-fit: cover;
 }
+
+@media screen and (max-width: 450px) {
+  .profile__avatar {
+    margin-bottom: 27px;
+  }
+}
