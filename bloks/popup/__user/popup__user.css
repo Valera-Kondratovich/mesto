@@ -12,6 +12,22 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.popup__user:last-of-type {
+  margin-bottom: 54px;
+}
+
 .popup__user:focus {
   outline-color: #0099eb;
+}
+
+@media screen and (max-width: 450px) {
+  .popup__user {
+    margin-bottom: 34px;
+  }
+}
+
+@media screen and (max-height: 425px) {
+  .popup__user:last-of-type {
+    margin-bottom: 34px;
+  }
 }

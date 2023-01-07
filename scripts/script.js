@@ -4,8 +4,8 @@ let buttonFormClose = document.querySelector('.popup__button-close');
 let buttonFormSave = document.querySelector('.popup__button-save');
 let porfileName = document.querySelector('.profile__name');
 let profileDescr = document.querySelector('.profile__description');
-let popupUserName = document.querySelector('.popup__user_name');
-let popupUserDescr = document.querySelector('.popup__user_description');
+let popupUserName = document.querySelector('.popup__user_input_name');
+let popupUserDescr = document.querySelector('.popup__user_input_description');
 let formUser = document.querySelector('.popup__profile-edit');
 
 function formEditDisplay() {
