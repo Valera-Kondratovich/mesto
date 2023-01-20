@@ -103,45 +103,78 @@ const initialCards = [
   }
 ];
 
-const galleryTemplate = document.querySelector('.template').content;
-const sectionElements = document.querySelector('.elements');
+const galleryTemplate = document.querySelector('.template').content; //беру разметку с шаблона
+const sectionElements = document.querySelector('.elements'); //беру элемент внутрь которого буду вставлять разметку из шаблона
 const sectionFooter = document.querySelector('.footer');
 
-initialCards.forEach(function (item) {
+//создание карточки из шаблона + навешиваю слушатели на кнопки
+const createCard = (name, link) => {
   const galleryElement = galleryTemplate.querySelector('.elements__element').cloneNode(true);
   const buttonLike = galleryElement.querySelector('.elements__button-like');
   const buttonDel = galleryElement.querySelector('.elements__button-trash');
-  const buttonImage = galleryElement.querySelector('.elements__img');
+  galleryElement.querySelector('.elements__title').textContent = name;
+  galleryElement.querySelector('.elements__img').src = link;
 
 
-  galleryElement.querySelector('.elements__title').textContent = item.name;
-  galleryElement.querySelector('.elements__img').src = item.link;
-
-  buttonImage.addEventListener('click', function (event) {
-    const templateImage = document.querySelector('.template-image').content;
-    const eventTarget = event.target;
-    const srcImage = eventTarget.getAttribute('src');
-    const popupImage = templateImage.querySelector('.popup-image').cloneNode(true);
-    const inputImage = popupImage.querySelector('.popup-image__img');
-    inputImage.setAttribute('src', srcImage);
-
-    sectionFooter.after(popupImage);
-
-
-  })
-
-  buttonLike.addEventListener('click', function (event) {
-    const eventTarget = event.target;
-    eventTarget.classList.toggle('elements__button-like_active');
+  buttonLike.addEventListener('click', () => {
+    buttonLike.classList.toggle('elements__button-like_active');
   });
 
-  buttonDel.addEventListener('click', function (event) {
-    const eventTarget = event.target;
-    eventTarget.closest('.elements__element').remove()
+  buttonDel.addEventListener('click', () => {
+    galleryElement.remove();
   });
 
-  sectionElements.append(galleryElement);
+  renderCard(galleryElement);
+}
+
+const renderCard = (element) => {
+  sectionElements.append(element);
+
+};
+
+initialCards.forEach(function (item) {
+  const name = item.name;
+  const link = item.link;
+  createCard(name, link);
 });
 
-//popup image
+
+
+// initialCards.forEach(function (item) {
+//   const galleryElement = galleryTemplate.querySelector('.elements__element').cloneNode(true);
+//   const buttonLike = galleryElement.querySelector('.elements__button-like');
+//   const buttonDel = galleryElement.querySelector('.elements__button-trash');
+//   const buttonImage = galleryElement.querySelector('.elements__img');
+
+
+//   galleryElement.querySelector('.elements__title').textContent = item.name;
+//   galleryElement.querySelector('.elements__img').src = item.link;
+
+//   buttonImage.addEventListener('click', function (event) {
+//     const templateImage = document.querySelector('.template-image').content;
+//     const eventTarget = event.target;
+//     const srcImage = eventTarget.getAttribute('src');
+//     const popupImage = templateImage.querySelector('.popup-image').cloneNode(true);
+//     const inputImage = popupImage.querySelector('.popup-image__img');
+//     inputImage.setAttribute('src', srcImage);
+
+//     sectionFooter.after(popupImage);
+
+
+//   })
+
+//   buttonLike.addEventListener('click', function (event) {
+//     const eventTarget = event.target;
+//     eventTarget.classList.toggle('elements__button-like_active');
+//   });
+
+//   buttonDel.addEventListener('click', function (event) {
+//     const eventTarget = event.target;
+//     eventTarget.closest('.elements__element').remove()
+//   });
+
+//   sectionElements.append(galleryElement);
+// });
+
+// //popup image
 
