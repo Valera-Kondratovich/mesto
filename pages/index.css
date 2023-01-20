@@ -25,15 +25,16 @@
 @import url(../bloks/elements/__group/elements__group.css);
 @import url(../bloks/elements/__title/elements__title.css);
 @import url(../bloks/elements/__button-like/elements__button-like.css);
+@import url(../bloks/elements/__button-like/_active/elements__button-like_active.css);
 /* -----секция footer-------*/
 @import url(../bloks/footer/footer.css);
 /* -----секция popup-------*/
-@import url(../bloks/popup/popup.css);
-@import url(../bloks/popup/_visible/popup_visible.css);
-@import url(../bloks/popup/__body/popup__body.css);
-@import url(../bloks/popup/__button-close/popup__button-close.css);
-@import url(../bloks/popup/__content/popup__content.css);
-@import url(../bloks/popup/__profile-edit/popup__profile-edit.css);
-@import url(../bloks/popup/__title/popup__title.css);
-@import url(../bloks/popup/__user/popup__user.css);
-@import url(../bloks/popup/__button-save/popup__button-save.css);
+@import url(../bloks/popup-edit/popup-edit.css);
+@import url(../bloks/popup-edit/_visible/popup-edit_visible.css);
+@import url(../bloks/popup-edit/__body/popup-edit__body.css);
+@import url(../bloks/popup-edit/__button-close/popup-edit__button-close.css);
+@import url(../bloks/popup-edit/__content/popup-edit__content.css);
+@import url(../bloks/popup-edit/__profile/popup-edit__profile-edit.css);
+@import url(../bloks/popup-edit/__title/popup-edit__title.css);
+@import url(../bloks/popup-edit/__user/popup-edit__user.css);
+@import url(../bloks/popup-edit/__button-save/popup-edit__button-save.css);

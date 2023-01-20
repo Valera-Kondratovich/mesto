@@ -1,4 +1,4 @@
-.popup__user {
+.popup-edit__user {
   display: block;
   width: 100%;
   border: 0;
@@ -12,22 +12,22 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.popup__user:last-of-type {
+.popup-edit__user:last-of-type {
   margin-bottom: 54px;
 }
 
-.popup__user:focus {
+.popup-edit__user:focus {
   outline-color: #0099eb;
 }
 
 @media screen and (max-width: 450px) {
-  .popup__user {
+  .popup-edit__user {
     margin-bottom: 34px;
   }
 }
 
 @media screen and (max-height: 425px) {
-  .popup__user:last-of-type {
+  .popup-edit__user:last-of-type {
     margin-bottom: 34px;
   }
 }

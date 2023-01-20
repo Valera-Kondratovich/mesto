@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/style.css">
   <link rel="stylesheet" href="./pages/index.css">
   <title>Русские места</title>
 </head>
@@ -27,70 +28,61 @@
       <button class="profile__button-add" type="button"></button>
     </section>
     <section class="elements">
-      <div class="elements__element">
-        <img class="elements__img" src="./images/karachaevo.jpg" alt="Среди гор стоит старый каменный храм">
-        <div class="elements__group">
-          <h2 class="elements__title">Карачаевск</h2>
-          <button class="elements__button-like" type="button"></button>
-        </div>
-      </div>
-      <div class="elements__element">
-        <img class="elements__img" src="./images/elbrus.jpg" alt="На закате в далее виднееться вершина Эльбруса">
-        <div class="elements__group">
-          <h2 class="elements__title">Гора Эльбрус</h2>
-          <button class="elements__button-like" type="button"></button>
-        </div>
-      </div>
-      <div class="elements__element">
-        <img class="elements__img" src="./images/dombai.jpg" alt="По середине горных сопок возвышается вверх пик горы">
-        <div class="elements__group">
-          <h2 class="elements__title">Домбай</h2>
-          <button class="elements__button-like" type="button"></button>
-        </div>
-      </div>
-      <div class="elements__element">
-        <img class="elements__img" src="./images/altai.jpg"
-          alt="На переднем плане зеленный алтайский луг, по середине течет спокойно речка, на заднем плане виднеется заснеженная гора">
-        <div class="elements__group">
-          <h2 class="elements__title">Алтай</h2>
-          <button class="elements__button-like" type="button"></button>
-        </div>
-      </div>
-      <div class="elements__element">
-        <img class="elements__img" src="./images/kazan.jpg" alt="по середине площади стоит большая красивая мечеть">
-        <div class="elements__group">
-          <h2 class="elements__title">Казань</h2>
-          <button class="elements__button-like" type="button"></button>
-        </div>
-      </div>
-      <div class="elements__element">
-        <img class="elements__img" src="./images/rybachy.jpg"
-          alt="Красивая осенняя природа, по середине с верху вниз среди холмов течет река">
-        <div class="elements__group">
-          <h2 class="elements__title">Полуостров Рыбачий</h2>
-          <button class="elements__button-like" type="button"></button>
-        </div>
-      </div>
     </section>
     <footer class="footer">
       <p>&#169; 2022 Mesto Russia</p>
     </footer>
   </main>
-  <div class="popup">
-    <div class="popup__body">
-      <button class="popup__button-close" type="button"></button>
-      <div class="popup__content">
-        <form class="popup__profile-edit" name="profile">
-          <h2 class="popup__title">Редактировать профиль</h2>
-          <input class="popup__user popup__user_input_name" type="text" name="firstname" placeholder="Введите Ваше Имя"
-            required>
-          <input class="popup__user popup__user_input_description" type="text" name="description"
+  <div class="popup-edit">
+    <div class="popup-edit__body">
+      <button class="popup-edit__button-close" type="button"></button>
+      <div class="popup-edit__content">
+        <form class="popup-edit__profile" name="profile">
+          <h2 class="popup-edit__title">Редактировать профиль</h2>
+          <input class="popup-edit__user popup-edit__user_input_name" type="text" name="firstname"
+            placeholder="Введите Ваше Имя" required>
+          <input class="popup-edit__user popup-edit__user_input_description" type="text" name="description"
             placeholder="Опишите Ваш род деятельности">
-          <button class="popup__button-save" type="submit">Сохранить</button>
+          <button class="popup-edit__button-save" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
   </div>
+  <div class="popup-add">
+    <div class="popup-add__body">
+      <button class="popup-add__button-close" type="button"></button>
+      <div class="popup-add__content">
+        <form class="popup-add__gallery" name="gallery">
+          <h2 class="popup-add__title">Новое место</h2>
+          <input class="popup-add__input popup-add__name_input_header" type="text" name="header"
+            placeholder="Имя картинки" required>
+          <input class="popup-add__input popup-add__url_input_link" type="text" name="link"
+            placeholder="Ссылка на картинку">
+          <button class="popup-add__button-save" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <template class="template-image">
+    <div class="popup-image">
+      <div class="popup-image__body">
+        <button class="popup-image__button-close" type="button"></button>
+        <div class="popup-image__content">
+          <img class="popup-image__img" src="" alt="">
+        </div>
+      </div>
+    </div>
+  </template>
+  <template class="template">
+    <div class="elements__element">
+      <img class="elements__img" src="" alt="">
+      <div class="elements__group">
+        <h2 class="elements__title"></h2>
+        <button class="elements__button-like" type="button"></button>
+      </div>
+      <button class="elements__button-trash" type="button"></button>
+    </div>
+  </template>
   <script src="./scripts/script.js"></script>
 </body>
 
