@@ -55,14 +55,12 @@ function formGallerySave(evt) {
   galleryElement.querySelector('.elements__img').src = inputLinkGallery.value;
   const buttonLike = galleryElement.querySelector('.elements__button-like');
   const buttonDel = galleryElement.querySelector('.elements__button-trash');
-  buttonLike.addEventListener('click', function (event) {
-    const eventTarget = event.target;
-    eventTarget.classList.toggle('elements__button-like_active');
+  buttonLike.addEventListener('click', () => {
+    buttonLike.classList.toggle('elements__button-like_active');
   });
 
-  buttonDel.addEventListener('click', function (event) {
-    const eventTarget = event.target;
-    eventTarget.closest('.elements__element').remove()
+  buttonDel.addEventListener('click', () => {
+    galleryElement.remove()
   });
 
   sectionElements.prepend(galleryElement);
