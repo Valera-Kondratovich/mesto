@@ -37,8 +37,8 @@ const buttonGalleryAdd = document.querySelector('.profile__button-add'); // на
 const popupGallery = document.querySelector('.popup-add'); //попап добавления картинки
 const buttonGalleryClose = document.querySelector('.popup-add__button-close'); // кнопка закрытия попап окна
 const buttonGallerySave = document.querySelector('.popup-add__button-save'); // кнопка сохранения попап окна
-const inputHeaderGallery = document.querySelector('.popup-add__name_input_header'); //поле ввода описания в попап окне
-const inputLinkGallery = document.querySelector('.popup-add__url_input_link'); //поле ссылки на картинку в попап окне
+const inputHeaderGallery = document.querySelector('.popup-add__input_header'); //поле ввода описания в попап окне
+const inputLinkGallery = document.querySelector('.popup-add__input_link'); //поле ссылки на картинку в попап окне
 const formGallery = document.querySelector('.popup-add__gallery'); //нашел форму в попап окне
 
 //отображаем попап
