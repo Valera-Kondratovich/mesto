@@ -1,15 +1,16 @@
 // popup-edit
 
-const buttonFormEdit = document.querySelector('.profile__button-edit');
-const formProfile = document.querySelector('.popup-edit');
-const buttonFormClose = document.querySelector('.popup-edit__button-close');
-const buttonFormSave = document.querySelector('.popup-edit__button-save');
-const porfileName = document.querySelector('.profile__name');
-const profileDescr = document.querySelector('.profile__description');
-const popupUserName = document.querySelector('.popup-edit__user_input_name');
-const popupUserDescr = document.querySelector('.popup-edit__user_input_description');
-const formUser = document.querySelector('.popup-edit__profile');
+const buttonFormEdit = document.querySelector('.profile__button-edit'); //нашел кнопку редактирования профиля
+const formProfile = document.querySelector('.popup-edit'); //нашел попап окно редактирования профиля
+const buttonFormClose = document.querySelector('.popup-edit__button-close'); //нашел кнопку закрытия профиля
+const buttonFormSave = document.querySelector('.popup-edit__button-save'); //нашел кнопку сохранения профиля
+const porfileName = document.querySelector('.profile__name'); //сохранил имя профиля
+const profileDescr = document.querySelector('.profile__description'); //сохранил описание профиля
+const popupUserName = document.querySelector('.popup-edit__user_input_name'); //нашел поле ввода имени профиля в попап окне
+const popupUserDescr = document.querySelector('.popup-edit__user_input_description'); //нашел поле ввода описания профиля в попап окне
+const formUser = document.querySelector('.popup-edit__profile'); //нашел форму профиля
 
+// функции кнопки редактирования профиля
 function formEditDisplay() {
   formProfile.classList.add('popup-edit_visible');
   popupUserName.value = porfileName.textContent;
@@ -31,44 +32,70 @@ formUser.addEventListener('submit', formEditSave);
 buttonFormEdit.addEventListener('click', formEditDisplay);
 buttonFormClose.addEventListener('click', formEditClose);
 
-// popup-add
-const buttonGalleryAdd = document.querySelector('.profile__button-add');
-const popupGallery = document.querySelector('.popup-add');
-const buttonGalleryClose = document.querySelector('.popup-add__button-close');
-const buttonGallerySave = document.querySelector('.popup-add__button-save');
-const inputHeaderGallery = document.querySelector('.popup-add__name_input_header');
-const inputLinkGallery = document.querySelector('.popup-add__url_input_link');
-const formGallery = document.querySelector('.popup-add__gallery');
+// ниже функции отработки на нажатие кнопки добавить картинки
+const buttonGalleryAdd = document.querySelector('.profile__button-add'); // нашел кнопку добавления картинки
+const popupGallery = document.querySelector('.popup-add'); //попап добавления картинки
+const buttonGalleryClose = document.querySelector('.popup-add__button-close'); // кнопка закрытия попап окна
+const buttonGallerySave = document.querySelector('.popup-add__button-save'); // кнопка сохранения попап окна
+const inputHeaderGallery = document.querySelector('.popup-add__name_input_header'); //поле ввода описания в попап окне
+const inputLinkGallery = document.querySelector('.popup-add__url_input_link'); //поле ссылки на картинку в попап окне
+const formGallery = document.querySelector('.popup-add__gallery'); //нашел форму в попап окне
 
+//отображаем попап
 function formGalleryDisplay() {
   popupGallery.classList.add('popup-add_visible');
 }
-
+//закрываем попап
 function formGalleryClose() {
   popupGallery.classList.remove('popup-add_visible');
 }
-
+//здесь добавляю новую карточку в HTML разметку, и вешаю слушатели на лайк, на удаление картинки и отображение картинки на весь экран
 function formGallerySave(evt) {
   evt.preventDefault();
-  const galleryElement = galleryTemplate.querySelector('.elements__element').cloneNode(true);
-  galleryElement.querySelector('.elements__title').textContent = inputHeaderGallery.value;
-  galleryElement.querySelector('.elements__img').src = inputLinkGallery.value;
-  const buttonLike = galleryElement.querySelector('.elements__button-like');
-  const buttonDel = galleryElement.querySelector('.elements__button-trash');
-  buttonLike.addEventListener('click', function (event) {
-    const eventTarget = event.target;
-    eventTarget.classList.toggle('elements__button-like_active');
+  const galleryElement = galleryTemplate.querySelector('.elements__element').cloneNode(true); //клонируем разметку с шаблона
+  const buttonLike = galleryElement.querySelector('.elements__button-like'); //нашел в шаблоне кнопку лайк
+  const buttonDel = galleryElement.querySelector('.elements__button-trash'); //нашел в шаблоне кнопку удалить
+  const buttonImage = galleryElement.querySelector('.elements__img'); //нашел в шаблоне саму картинку
+  galleryElement.querySelector('.elements__title').textContent = inputHeaderGallery.value; //копируем название картинки в поле название картинки
+  galleryElement.querySelector('.elements__img').src = inputLinkGallery.value; //копируем ссылку на картинку в атрибут src тега img
+  galleryElement.querySelector('.elements__img').alt = inputHeaderGallery.value; //копируем название картинки в атрибут alt тега img
+
+  // здесь отрбатывается нажатие на лайк
+  buttonLike.addEventListener('click', () => {
+    buttonLike.classList.toggle('elements__button-like_active');
   });
 
-  buttonDel.addEventListener('click', function (event) {
-    const eventTarget = event.target;
-    eventTarget.closest('.elements__element').remove()
+  //здесь удаляется элемент из разметки при нажатии на кнопку
+  buttonDel.addEventListener('click', () => {
+    galleryElement.remove()
   });
 
-  sectionElements.prepend(galleryElement);
-  popupGallery.classList.remove('popup-add_visible');
+  //здесь отрабатывается клик по картинке
+  buttonImage.addEventListener('click', () => {
+    const srcImage = buttonImage.getAttribute('src'); //копируем src картинки
+    const titleImage = galleryElement.querySelector('.elements__title'); //копируем название картинки
+    const popupImage = document.querySelector('.popup-image') //нашел попап окно картинки
+    const inputImage = popupImage.querySelector('.popup-image__img'); //нашел тег картинки в попап окне
+    const buttonCloseImage = popupImage.querySelector('.popup-image__button-close'); //нашел кнопку закрытия попап окна
+    const depiction = popupImage.querySelector('.popup-image__title'); //нашел поле куда будет ставлятся название картинки
+    depiction.textContent = titleImage.textContent; //копируем название картинки из карточки в попап окно
+
+    //прописываем в попап окне в теге img атрибут src
+    inputImage.setAttribute('src', srcImage);
+
+    //здесь отрабатывает кнопка закрытия
+    buttonCloseImage.addEventListener('click', () => {
+      popupImage.classList.remove('popup-image_visible');
+    });
+    //здесь отображаем попап окно
+    popupImage.classList.add('popup-image_visible');
+  });
+
+  sectionElements.prepend(galleryElement); //добавляю в начало карточку картинки
+  popupGallery.classList.remove('popup-add_visible'); //скрываю попап окно добавления картинки
+  inputHeaderGallery.value = ''; //очищаею поле описания картинки
+  inputLinkGallery.value = ''; //очищаею поле ссылки на картинку
 }
-
 
 buttonGalleryAdd.addEventListener('click', formGalleryDisplay);
 buttonGalleryClose.addEventListener('click', formGalleryClose);
@@ -103,45 +130,49 @@ const initialCards = [
   }
 ];
 
-const galleryTemplate = document.querySelector('.template').content;
-const sectionElements = document.querySelector('.elements');
-const sectionFooter = document.querySelector('.footer');
+const galleryTemplate = document.querySelector('.template').content; //беру разметку с шаблона
+const sectionElements = document.querySelector('.elements'); //беру элемент внутрь которого буду вставлять разметку из шаблона
 
-initialCards.forEach(function (item) {
+
+//создание карточки из шаблона + навешиваю слушатели на кнопки
+const createCard = (name, link) => {
   const galleryElement = galleryTemplate.querySelector('.elements__element').cloneNode(true);
   const buttonLike = galleryElement.querySelector('.elements__button-like');
   const buttonDel = galleryElement.querySelector('.elements__button-trash');
   const buttonImage = galleryElement.querySelector('.elements__img');
-
-
-  galleryElement.querySelector('.elements__title').textContent = item.name;
-  galleryElement.querySelector('.elements__img').src = item.link;
-
-  buttonImage.addEventListener('click', function (event) {
-    const templateImage = document.querySelector('.template-image').content;
-    const eventTarget = event.target;
-    const srcImage = eventTarget.getAttribute('src');
-    const popupImage = templateImage.querySelector('.popup-image').cloneNode(true);
+  const titleImage = galleryElement.querySelector('.elements__title');
+  galleryElement.querySelector('.elements__title').textContent = name;
+  galleryElement.querySelector('.elements__img').alt = name;
+  galleryElement.querySelector('.elements__img').src = link;
+  buttonLike.addEventListener('click', () => {
+    buttonLike.classList.toggle('elements__button-like_active');
+  });
+  buttonDel.addEventListener('click', () => {
+    galleryElement.remove();
+  });
+  buttonImage.addEventListener('click', () => {
+    const srcImage = buttonImage.getAttribute('src');
+    const popupImage = document.querySelector('.popup-image')
     const inputImage = popupImage.querySelector('.popup-image__img');
+    const buttonCloseImage = popupImage.querySelector('.popup-image__button-close');
+    const depiction = popupImage.querySelector('.popup-image__title');
+    depiction.textContent = titleImage.textContent;
     inputImage.setAttribute('src', srcImage);
-
-    sectionFooter.after(popupImage);
-
-
-  })
-
-  buttonLike.addEventListener('click', function (event) {
-    const eventTarget = event.target;
-    eventTarget.classList.toggle('elements__button-like_active');
+    buttonCloseImage.addEventListener('click', () => {
+      popupImage.classList.remove('popup-image_visible');
+    });
+    popupImage.classList.add('popup-image_visible');
   });
+  renderCard(galleryElement);
+}
 
-  buttonDel.addEventListener('click', function (event) {
-    const eventTarget = event.target;
-    eventTarget.closest('.elements__element').remove()
-  });
+const renderCard = (element) => {
+  sectionElements.append(element);
+};
 
-  sectionElements.append(galleryElement);
+initialCards.forEach(function (item) {
+  const name = item.name;
+  const link = item.link;
+  createCard(name, link);
 });
-
-//popup image
 
