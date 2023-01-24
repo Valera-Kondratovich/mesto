@@ -29,30 +29,17 @@
 @import url(../bloks/elements/__button-trash/elements__button-trash.css);
 /* -----секция footer-------*/
 @import url(../bloks/footer/footer.css);
-/* -----секция popup-Редактирование профиля------*/
-@import url(../bloks/popup-edit/popup-edit.css);
-@import url(../bloks/popup-edit/_visible/popup-edit_visible.css);
-@import url(../bloks/popup-edit/__body/popup-edit__body.css);
-@import url(../bloks/popup-edit/__button-close/popup-edit__button-close.css);
-@import url(../bloks/popup-edit/__content/popup-edit__content.css);
-@import url(../bloks/popup-edit/__profile/popup-edit__profile-edit.css);
-@import url(../bloks/popup-edit/__title/popup-edit__title.css);
-@import url(../bloks/popup-edit/__user/popup-edit__user.css);
-@import url(../bloks/popup-edit/__button-save/popup-edit__button-save.css);
-/* -----секция popup-Добавление картинки------*/
-@import url(../bloks/popup-add/popup-add.css);
-@import url(../bloks/popup-add/__body/popup-add__body.css);
-@import url(../bloks/popup-add/__button-close/popup-add__button-close.css);
-@import url(../bloks/popup-add/__button-save/popup-add__button-save.css);
-@import url(../bloks/popup-add/__content/popup-add__content.css);
-@import url(../bloks/popup-add/__gallery/popup-add__gallery.css);
-@import url(../bloks/popup-add/__input/popup-add__input.css);
-@import url(../bloks/popup-add/__title/popup-add__title.css);
-@import url(../bloks/popup-add/_visible/popup-add_visible.css);
-/* -----секция popup-картинка на весь экран------*/
-@import url(../bloks/popup-image/popup-image.css);
-@import url(../bloks/popup-image/__body/popup-image__body.css);
-@import url(../bloks/popup-image/__button-close/popup-image__button-close.css);
-@import url(../bloks/popup-image/__img/popup-image__img.css);
-@import url(../bloks/popup-image/__title/popup-image__title.css);
-@import url(../bloks/popup-image/_visible/popup-image_visible.css);
+/* -----секция popup-----*/
+@import url(../bloks/popup/popup.css);
+@import url(../bloks/popup/__body/popup__body.css);
+@import url(../bloks/popup/__button-close/popup__button-close.css);
+@import url(../bloks/popup/__content/popup__content.css);
+@import url(../bloks/popup/__form/popup__form.css);
+@import url(../bloks/popup/__title/popup__title.css);
+@import url(../bloks/popup/__input/popup__input.css);
+@import url(../bloks/popup/__button-save/popup__button-save.css);
+@import url(../bloks/popup/_opened/popup_opened.css);
+@import url(../bloks/popup/__image/popup__image.css);
+@import url(../bloks/popup/__wrap/popup__wrap.css);
+@import url(../bloks/popup/__picture/popup__picture.css);
+@import url(../bloks/popup/__description/popup__description.css);

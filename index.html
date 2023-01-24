@@ -28,46 +28,44 @@
     </section>
     <section class="elements">
     </section>
-    <footer class="footer">
-      <p>&#169; 2022 Mesto Russia</p>
-    </footer>
   </main>
+  <footer class="footer">
+    <p>&#169; 2022 Mesto Russia</p>
+  </footer>
 
-  <div class="popup-edit">
-    <div class="popup-edit__body">
-      <button class="popup-edit__button-close" type="button"></button>
-      <div class="popup-edit__content">
-        <form class="popup-edit__profile" name="profile">
-          <h2 class="popup-edit__title">Редактировать профиль</h2>
-          <input class="popup-edit__user popup-edit__user_input_name" type="text" name="firstname"
-            placeholder="Введите Ваше Имя" required>
-          <input class="popup-edit__user popup-edit__user_input_description" type="text" name="description"
-            placeholder="Опишите Ваш род деятельности">
-          <button class="popup-edit__button-save" type="submit">Сохранить</button>
-        </form>
-      </div>
-    </div>
-  </div>
-  <div class="popup-add">
-    <div class="popup-add__body">
-      <button class="popup-add__button-close" type="button"></button>
-      <div class="popup-add__content">
-        <form class="popup-add__gallery" name="gallery">
-          <h2 class="popup-add__title">Новое место</h2>
-          <input class="popup-add__input popup-add__input_header" type="text" name="header" placeholder="Имя картинки"
+  <div class="popup popup__edit">
+    <div class="popup__body">
+      <button class="popup__button-close" type="button"></button>
+      <div class="popup__content">
+        <form class="popup__form popup__profile" name="profile">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <input class="popup__input popup__input_name" type="text" name="firstname" placeholder="Введите Ваше Имя"
             required>
-          <input class="popup-add__input popup-add__input_link" type="text" name="link"
-            placeholder="Ссылка на картинку">
-          <button class="popup-add__button-save" type="submit">Сохранить</button>
+          <input class="popup__input popup__input_description" type="text" name="description"
+            placeholder="Опишите Ваш род деятельности">
+          <button class="popup__button-save" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
   </div>
-  <div class="popup-image">
-    <div class="popup-image__body">
-      <button class="popup-image__button-close" type="button"></button>
-      <img class="popup-image__img" src="#" alt="#">
-      <p class="popup-image__title"></p>
+  <div class="popup popup__add">
+    <div class="popup__body">
+      <button class="popup__button-close" type="button"></button>
+      <div class="popup__content">
+        <form class="popup__form popup__gallery" name="gallery">
+          <h2 class="popup__title">Новое место</h2>
+          <input class="popup__input popup__input_header" type="text" name="header" placeholder="Имя картинки" required>
+          <input class="popup__input popup__input_link" type="text" name="link" placeholder="Ссылка на картинку">
+          <button class="popup__button-save" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="popup popup__image">
+    <div class="popup__wrap">
+      <button class="popup__button-close" type="button"></button>
+      <img class="popup__picture" src="#" alt="#">
+      <p class="popup__description"></p>
     </div>
   </div>
   <template class="template">
@@ -80,6 +78,7 @@
       <button class="elements__button-trash" type="button"></button>
     </div>
   </template>
+  <script src="./scripts/script_arr_cards.js"></script>
   <script src="./scripts/script.js"></script>
 </body>
 
