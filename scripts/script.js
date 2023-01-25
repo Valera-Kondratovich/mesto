@@ -30,15 +30,15 @@ function savePopupEdit(evt) {
   evt.preventDefault();
   porfileName.textContent = popupUserName.value;
   profileDescr.textContent = popupUserDescr.value;
-  formEdit.classList.remove('popup_opened');
+  closePopup(formEdit);
 }
 
 function saveFormGallery(evt) {
   evt.preventDefault();
   sectionElements.prepend(createCard(inputHeaderGallery.value, inputLinkGallery.value)); //добавляю в начало карточку картинки
-  popupGallery.classList.remove('popup_opened'); //скрываю попап окно добавления картинки
   inputHeaderGallery.value = ''; //очищаею поле описания картинки
   inputLinkGallery.value = ''; //очищаею поле ссылки на картинку
+  closePopup(popupGallery); //скрываю попап окно добавления картинки
 }
 
 const createCard = (name, link) => {
@@ -66,10 +66,10 @@ const createCard = (name, link) => {
     galleryElement.remove();
   });
   buttonImage.addEventListener('click', () => {
+    openPopup(popupImage);
     depiction.textContent = titleImage.textContent;
     inputImage.setAttribute('src', galleryElement.querySelector('.elements__img').src);
     inputImage.setAttribute('alt', galleryElement.querySelector('.elements__img').alt);
-    popupImage.classList.add('popup_opened');
   });
 
   return galleryElement;
