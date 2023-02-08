@@ -37,30 +37,38 @@
     <div class="popup__body">
       <button class="popup__button-close" type="button"></button>
       <div class="popup__content">
-        <form class="popup__form popup__profile" name="profile">
+        <form class="popup__form popup__profile" name="profile" novalidate>
           <h2 class="popup__title">Редактировать профиль</h2>
-          <input class="popup__input popup__input_name" type="text" name="firstname" placeholder="Введите Ваше Имя"
-            required>
-          <input class="popup__input popup__input_description" type="text" name="description"
-            placeholder="Опишите Ваш род деятельности">
+          <input id="input-name" class="popup__input popup__input_name" type="text" name="firstname"
+            placeholder="Введите Ваше Имя" required minlength="2" maxlength="40">
+          <span id="input-name-error" class="popup__error"></span>
+          <input id="input-descr" class="popup__input popup__input_description" type="text" name="description"
+            placeholder="О себе" required minlength="2" maxlength="200">
+          <span id="input-descr-error" class="popup__error"></span>
           <button class="popup__button-save" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
   </div>
+
   <div class="popup popup_add">
     <div class="popup__body">
       <button class="popup__button-close" type="button"></button>
       <div class="popup__content">
-        <form class="popup__form popup__gallery" name="gallery">
+        <form class="popup__form popup__gallery" name="gallery" novalidate>
           <h2 class="popup__title">Новое место</h2>
-          <input class="popup__input popup__input_header" type="text" name="header" placeholder="Имя картинки" required>
-          <input class="popup__input popup__input_link" type="text" name="link" placeholder="Ссылка на картинку">
+          <input id="input-img-name" class="popup__input popup__input_header" type="text" name="header"
+            placeholder="Имя картинки" required minlength="2" maxlength="30">
+          <span id="input-img-name-error" class="popup__error"></span>
+          <input id="input-img-url" class="popup__input popup__input_link" type="url" name="link"
+            placeholder="Ссылка на картинку" required>
+          <span id="input-img-url-error" class="popup__error"></span>
           <button class="popup__button-save" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
   </div>
+
   <div class="popup popup_image">
     <div class="popup__wrap">
       <button class="popup__button-close" type="button"></button>
@@ -78,6 +86,7 @@
       <button class="elements__button-trash" type="button"></button>
     </div>
   </template>
+  <script src="./scripts/validate.js"></script>
   <script src="./scripts/script_arr_cards.js"></script>
   <script src="./scripts/script.js"></script>
 </body>

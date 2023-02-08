@@ -17,24 +17,27 @@ const formGallery = popupGallery.querySelector('.popup__gallery'); //нашел 
 const galleryTemplate = document.querySelector('.template').content; //беру разметку с шаблона
 const sectionElements = document.querySelector('.elements'); //беру элемент внутрь которого буду вставлять разметку из шаблона
 
-
 function openPopup(item) {
   item.classList.add('popup_opened');
+
 }
 
 function closePopup(item) {
   item.classList.remove('popup_opened');
 }
 
-function savePopupEdit(evt) {
+function disabledSubmit(evt) {
   evt.preventDefault();
+}
+function savePopupEdit(evt) {
+  disabledSubmit(evt);
   porfileName.textContent = popupUserName.value;
   profileDescr.textContent = popupUserDescr.value;
   closePopup(formEdit);
 }
 
 function saveFormGallery(evt) {
-  evt.preventDefault();
+  disabledSubmit(evt);
   sectionElements.prepend(createCard(inputHeaderGallery.value, inputLinkGallery.value)); //добавляю в начало карточку картинки
   inputHeaderGallery.value = ''; //очищаею поле описания картинки
   inputLinkGallery.value = ''; //очищаею поле ссылки на картинку
