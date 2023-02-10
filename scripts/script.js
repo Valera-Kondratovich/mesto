@@ -17,13 +17,41 @@ const formGallery = popupGallery.querySelector('.popup__gallery'); //нашел 
 const galleryTemplate = document.querySelector('.template').content; //беру разметку с шаблона
 const sectionElements = document.querySelector('.elements'); //беру элемент внутрь которого буду вставлять разметку из шаблона
 
+function hidePopup(popup, evt) {
+  const key = evt.key;
+  if (key === 'Escape') {
+    popup.classList.remove('popup_opened');
+  };
+}
+
+function closePopupEsc(popup) {
+  document.addEventListener('keydown', function (evt) {
+    hidePopup(popup, evt)
+  });
+  document.removeEventListener('keydown', function (evt) {
+    hidePopup(popup, evt)
+  });
+};
+
+function closePopupClick(popup) {
+  const form = popup.querySelector('.popup__form')
+  popup.addEventListener('mousedown', function (evt) {
+    if (evt.target.classList.contains('popup')) {
+      closePopup(popup)
+    }
+  });
+}
+
 function openPopup(item) {
   item.classList.add('popup_opened');
-
+  closePopupEsc(item);
+  closePopupClick(item);
+  enableValidation(config);
 }
 
 function closePopup(item) {
   item.classList.remove('popup_opened');
+
 }
 
 function disabledSubmit(evt) {
@@ -74,7 +102,6 @@ const createCard = (name, link) => {
     inputImage.setAttribute('src', galleryElement.querySelector('.elements__img').src);
     inputImage.setAttribute('alt', galleryElement.querySelector('.elements__img').alt);
   });
-
   return galleryElement;
 }
 
@@ -88,11 +115,19 @@ initialCards.forEach(function (item) {
   renderCard(name, link);
 });
 
-buttonFormEdit.addEventListener('click', () => openPopup(formEdit));
+buttonFormEdit.addEventListener('click', function () {
+  openPopup(formEdit)
+
+});
 buttonFormClose.addEventListener('click', () => closePopup(formEdit));
-buttonGalleryAdd.addEventListener('click', () => openPopup(popupGallery));
+buttonGalleryAdd.addEventListener('click', function () {
+  openPopup(popupGallery);
+
+});
 buttonGalleryClose.addEventListener('click', () => closePopup(popupGallery));
+
 formGallery.addEventListener('submit', saveFormGallery);
 formUser.addEventListener('submit', savePopupEdit);
 popupUserDescr.value = profileDescr.textContent;
 popupUserName.value = porfileName.textContent;
+

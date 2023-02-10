@@ -3,13 +3,13 @@
 }
 
 @media screen and (max-width: 500px) {
-  .popup__profile {
+  .popup__form {
     padding: 25px 22px;
   }
 }
 
 @media screen and (max-height: 425px) {
-  .popup__profile {
-    padding: 9px 36px 5px;
+  .popup__form {
+    padding: 9px 36px 9px;
   }
 }

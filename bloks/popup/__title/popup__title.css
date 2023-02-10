@@ -3,7 +3,7 @@
   font-size: 24px;
   font-weight: 900;
   line-height: 1.21;
-  margin: 0 0 50px;
+  margin: 0 0 41px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -23,12 +23,12 @@
 @media screen and (max-width: 450px) {
   .popup__title {
     font-size: 18px;
-    margin-bottom: 77px;
+    margin-bottom: 30px;
   }
 }
 
 @media screen and (max-height: 425px) {
   .popup__title {
-    margin: 0 0 24px;
+    margin: 0 0 20px;
   }
 }
