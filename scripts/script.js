@@ -16,59 +16,44 @@ const inputLinkGallery = popupGallery.querySelector('.popup__input_link'); //п�
 const formGallery = popupGallery.querySelector('.popup__gallery'); //нашел форму в попап окне
 const galleryTemplate = document.querySelector('.template').content; //беру разметку с шаблона
 const sectionElements = document.querySelector('.elements'); //беру элемент внутрь которого буду вставлять разметку из шаблона
-
-function hidePopup(popup, evt) {
-  const key = evt.key;
-  if (key === 'Escape') {
-    popup.classList.remove('popup_opened');
-  };
-}
-
-function closePopupEsc(popup) {
-  document.addEventListener('keydown', function (evt) {
-    hidePopup(popup, evt)
-  });
-  document.removeEventListener('keydown', function (evt) {
-    hidePopup(popup, evt)
-  });
-};
-
-function closePopupClick(popup) {
-  const form = popup.querySelector('.popup__form')
-  popup.addEventListener('mousedown', function (evt) {
-    if (evt.target.classList.contains('popup')) {
-      closePopup(popup)
-    }
-  });
-}
+const popupImage = document.querySelector('.popup_image');
+const inputImage = popupImage.querySelector('.popup__picture');
+const buttonCloseImage = popupImage.querySelector('.popup__button-close');
+const depiction = popupImage.querySelector('.popup__description');
 
 function openPopup(item) {
   item.classList.add('popup_opened');
-  closePopupEsc(item);
-  closePopupClick(item);
-  enableValidation(config);
+  document.addEventListener('keydown', closeByEscOrClick);
+  item.addEventListener('mousedown', closeByEscOrClick);
 }
 
 function closePopup(item) {
   item.classList.remove('popup_opened');
-
+  document.removeEventListener('keydown', closeByEscOrClick);
+  item.removeEventListener('mousedown', closeByEscOrClick);
 }
 
-function disabledSubmit(evt) {
+function closeByEscOrClick(evt) {
+  if (evt.key === 'Escape' || evt.target.classList.contains('popup') || evt.target.classList.contains('popup__button-close')) {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  };
+}
+
+function preventDefault(evt) {
   evt.preventDefault();
 }
 function savePopupEdit(evt) {
-  disabledSubmit(evt);
+  preventDefault(evt);
   porfileName.textContent = popupUserName.value;
   profileDescr.textContent = popupUserDescr.value;
   closePopup(formEdit);
 }
 
 function saveFormGallery(evt) {
-  disabledSubmit(evt);
+  preventDefault(evt);
   sectionElements.prepend(createCard(inputHeaderGallery.value, inputLinkGallery.value)); //добавляю в начало карточку картинки
-  inputHeaderGallery.value = ''; //очищаею поле описания картинки
-  inputLinkGallery.value = ''; //очищаею поле ссылки на картинку
+  evt.target.reset();
   closePopup(popupGallery); //скрываю попап окно добавления картинки
 }
 
@@ -78,16 +63,10 @@ const createCard = (name, link) => {
   const buttonDel = galleryElement.querySelector('.elements__button-trash');
   const buttonImage = galleryElement.querySelector('.elements__img');
   const titleImage = galleryElement.querySelector('.elements__title');
-  const popupImage = document.querySelector('.popup_image');
-  const inputImage = popupImage.querySelector('.popup__picture');
-  const buttonCloseImage = popupImage.querySelector('.popup__button-close');
-  const depiction = popupImage.querySelector('.popup__description');
 
   titleImage.textContent = name;
   buttonImage.alt = name;
   buttonImage.src = link;
-
-  buttonCloseImage.addEventListener('click', () => closePopup(popupImage));
 
   buttonLike.addEventListener('click', () => {
     buttonLike.classList.toggle('elements__button-like_active');
@@ -98,9 +77,9 @@ const createCard = (name, link) => {
   });
   buttonImage.addEventListener('click', () => {
     openPopup(popupImage);
-    depiction.textContent = titleImage.textContent;
-    inputImage.setAttribute('src', galleryElement.querySelector('.elements__img').src);
-    inputImage.setAttribute('alt', galleryElement.querySelector('.elements__img').alt);
+    depiction.textContent = name;
+    inputImage.setAttribute('src', link);
+    inputImage.setAttribute('alt', name);
   });
   return galleryElement;
 }
@@ -116,18 +95,18 @@ initialCards.forEach(function (item) {
 });
 
 buttonFormEdit.addEventListener('click', function () {
+  popupUserDescr.value = profileDescr.textContent;
+  popupUserName.value = porfileName.textContent;
   openPopup(formEdit)
-
 });
-buttonFormClose.addEventListener('click', () => closePopup(formEdit));
+
 buttonGalleryAdd.addEventListener('click', function () {
   openPopup(popupGallery);
 
 });
-buttonGalleryClose.addEventListener('click', () => closePopup(popupGallery));
+
 
 formGallery.addEventListener('submit', saveFormGallery);
 formUser.addEventListener('submit', savePopupEdit);
-popupUserDescr.value = profileDescr.textContent;
-popupUserName.value = porfileName.textContent;
+
 

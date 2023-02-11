@@ -6,14 +6,21 @@ const config = {
   errorClass: 'popup__error_visible'
 };
 
+enableValidation(config);
+
 function enableValidation(config) {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {
     setInputListeners(formElement, config);
     formElement.addEventListener('input', () => {
-      toggleButtonState(formElement, config);
+      toggleButtonState(formElement, config); //проверяем валидна ли форма с заполненными полями
     });
-    toggleButtonState(formElement, config);
+    toggleButtonState(formElement, config); //сразу отключаем кнопку, если форма невалидна
+    formElement.addEventListener('reset', () => { //отключаем кнопку если форма невалидна при следующем открыти попапа
+      setTimeout(() => {
+        toggleButtonState(formElement, config);
+      }, 0);
+    });
   });
 };
 
