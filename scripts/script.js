@@ -1,24 +1,24 @@
-const buttonFormEdit = document.querySelector('.profile__button-edit'); //нашел кнопку редактирования профиля
-const formEdit = document.querySelector('.popup_edit'); //нашел попап окно редактирования профиля
-const buttonFormClose = formEdit.querySelector('.popup__button-close'); //нашел кнопку закрытия профиля
-const buttonFormSave = formEdit.querySelector('.popup__edit__button-save'); //нашел кнопку сохранения профиля
 const porfileName = document.querySelector('.profile__name'); //сохранил имя профиля
 const profileDescr = document.querySelector('.profile__description'); //сохранил описание профиля
-const popupUserName = formEdit.querySelector('.popup__input_name'); //нашел поле ввода имени профиля в попап окне
-const popupUserDescr = formEdit.querySelector('.popup__input_description'); //нашел поле ввода описания профиля в попап окне
-const formUser = document.querySelector('.popup__profile'); //нашел форму профиля
+
+const buttonFormEdit = document.querySelector('.profile__button-edit'); //нашел кнопку редактирования профиля
+const popupEdit = document.querySelector('.popup_edit'); //нашел попап не форму окно редактирования профиля
+
+const profileForm = document.forms['profile']; //нашел форму профиля
+const popupUserName = profileForm.elements['input-name']; //нашел поле ввода имени профиля в попап окне
+const popupUserDescr = profileForm.elements['input-descr']; //нашел поле ввода описания профиля в попап окне
+
 const buttonGalleryAdd = document.querySelector('.profile__button-add'); // нашел кнопку добавления картинки
 const popupGallery = document.querySelector('.popup_add'); //попап добавления картинки
-const buttonGalleryClose = popupGallery.querySelector('.popup__button-close'); // кнопка закрытия попап окна
-const buttonGallerySave = popupGallery.querySelector('.popup__button-save'); // кнопка сохранения попап окна
-const inputHeaderGallery = popupGallery.querySelector('.popup__input_header'); //поле ввода описания в попап окне
-const inputLinkGallery = popupGallery.querySelector('.popup__input_link'); //поле ссылки на картинку в попап окне
-const formGallery = popupGallery.querySelector('.popup__gallery'); //нашел форму в попап окне
+
+const cardForm = document.forms['gallery']; //нашел форму галлерея
+const inputHeaderGallery = cardForm.elements['input-img-name']; //поле ввода описания в попап окне
+const inputLinkGallery = cardForm.elements['input-img-url']; //поле ссылки на картинку в попап окне
+
 const galleryTemplate = document.querySelector('.template').content; //беру разметку с шаблона
 const sectionElements = document.querySelector('.elements'); //беру элемент внутрь которого буду вставлять разметку из шаблона
 const popupImage = document.querySelector('.popup_image');
 const inputImage = popupImage.querySelector('.popup__picture');
-const buttonCloseImage = popupImage.querySelector('.popup__button-close');
 const depiction = popupImage.querySelector('.popup__description');
 
 function openPopup(item) {
@@ -47,7 +47,7 @@ function savePopupEdit(evt) {
   preventDefault(evt);
   porfileName.textContent = popupUserName.value;
   profileDescr.textContent = popupUserDescr.value;
-  closePopup(formEdit);
+  closePopup(popupEdit);
 }
 
 function saveFormGallery(evt) {
@@ -97,16 +97,14 @@ initialCards.forEach(function (item) {
 buttonFormEdit.addEventListener('click', function () {
   popupUserDescr.value = profileDescr.textContent;
   popupUserName.value = porfileName.textContent;
-  openPopup(formEdit)
+  openPopup(popupEdit)
 });
 
 buttonGalleryAdd.addEventListener('click', function () {
   openPopup(popupGallery);
-
 });
 
-
-formGallery.addEventListener('submit', saveFormGallery);
-formUser.addEventListener('submit', savePopupEdit);
+cardForm.addEventListener('submit', saveFormGallery);
+profileForm.addEventListener('submit', savePopupEdit);
 
 
