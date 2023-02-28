@@ -1,3 +1,10 @@
+// импортируем массив стартовых карточек,
+// скрипт вставки карточки на сайт,
+// скрипт валидации форм
+import _initialCards from './script_arr_cards.js';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+
 const porfileName = document.querySelector('.profile__name'); //сохранил имя профиля
 const profileDescr = document.querySelector('.profile__description'); //сохранил описание профиля
 
@@ -15,11 +22,40 @@ const cardForm = document.forms['gallery']; //нашел форму галлер
 const inputHeaderGallery = cardForm.elements['input-img-name']; //поле ввода описания в попап окне
 const inputLinkGallery = cardForm.elements['input-img-url']; //поле ссылки на картинку в попап окне
 
-const galleryTemplate = document.querySelector('.template').content; //беру разметку с шаблона
-const sectionElements = document.querySelector('.elements'); //беру элемент внутрь которого буду вставлять разметку из шаблона
-const popupImage = document.querySelector('.popup_image');
-const inputImage = popupImage.querySelector('.popup__picture');
-const depiction = popupImage.querySelector('.popup__description');
+//место куда будем вставлять шаблон
+const container = document.querySelector('.elements');
+
+//сам шаблон
+const template = document.querySelector('.template').content;
+
+//запускаем метод render для заполнения сайта стартовыми карточками
+_initialCards.forEach(item => {
+  const name = item.name;
+  const link = item.link;
+  new Card(name, link).renderCard(container, template);
+});
+
+// вешаем событие на клик кнопки редактирования профиля
+// и запускаем фалидацию формы
+buttonFormEdit.addEventListener('click', () => {
+  popupUserDescr.value = profileDescr.textContent;
+  popupUserName.value = porfileName.textContent;
+  openPopup(popupEdit);
+  new FormValidator(popupEdit.querySelector('.popup__form'));
+});
+
+// вешаем событие на клик кнопки добавления картинки
+// и запускаем фалидацию формы
+buttonGalleryAdd.addEventListener('click', function () {
+  openPopup(popupGallery);
+  new FormValidator(popupGallery.querySelector('.popup__form'));
+});
+
+//вешаем событие отправки формы редактирования профиля
+profileForm.addEventListener('submit', savePopupEdit);
+
+//вешаем событие отправки формы добавления карточки с картинкой
+cardForm.addEventListener('submit', saveFormGallery);
 
 function openPopup(item) {
   item.classList.add('popup_opened');
@@ -40,9 +76,12 @@ function closeByEscOrClick(evt) {
   };
 }
 
+//функция отмены стандартного отправления формы
 function preventDefault(evt) {
   evt.preventDefault();
 }
+
+//функция сохранения редактирования профиля
 function savePopupEdit(evt) {
   preventDefault(evt);
   porfileName.textContent = popupUserName.value;
@@ -50,61 +89,14 @@ function savePopupEdit(evt) {
   closePopup(popupEdit);
 }
 
+//функция добавления новой карточки с картинкой
+// передаем это событие классу Card
 function saveFormGallery(evt) {
   preventDefault(evt);
-  sectionElements.prepend(createCard(inputHeaderGallery.value, inputLinkGallery.value)); //добавляю в начало карточку картинки
-  evt.target.reset();
+  new Card(inputHeaderGallery.value, inputLinkGallery.value).renderCard(container, template)
+  evt.target.reset();//очищаю форму
   closePopup(popupGallery); //скрываю попап окно добавления картинки
 }
 
-const createCard = (name, link) => {
-  const galleryElement = galleryTemplate.querySelector('.elements__element').cloneNode(true);
-  const buttonLike = galleryElement.querySelector('.elements__button-like');
-  const buttonDel = galleryElement.querySelector('.elements__button-trash');
-  const buttonImage = galleryElement.querySelector('.elements__img');
-  const titleImage = galleryElement.querySelector('.elements__title');
-
-  titleImage.textContent = name;
-  buttonImage.alt = name;
-  buttonImage.src = link;
-
-  buttonLike.addEventListener('click', () => {
-    buttonLike.classList.toggle('elements__button-like_active');
-  });
-
-  buttonDel.addEventListener('click', () => {
-    galleryElement.remove();
-  });
-  buttonImage.addEventListener('click', () => {
-    openPopup(popupImage);
-    depiction.textContent = name;
-    inputImage.setAttribute('src', link);
-    inputImage.setAttribute('alt', name);
-  });
-  return galleryElement;
-}
-
-const renderCard = (name, link) => {
-  sectionElements.append(createCard(name, link));
-};
-
-initialCards.forEach(function (item) {
-  const name = item.name;
-  const link = item.link;
-  renderCard(name, link);
-});
-
-buttonFormEdit.addEventListener('click', function () {
-  popupUserDescr.value = profileDescr.textContent;
-  popupUserName.value = porfileName.textContent;
-  openPopup(popupEdit)
-});
-
-buttonGalleryAdd.addEventListener('click', function () {
-  openPopup(popupGallery);
-});
-
-cardForm.addEventListener('submit', saveFormGallery);
-profileForm.addEventListener('submit', savePopupEdit);
-
-
+// экспортируем openPopup в Card для вызова фукции в нутри класса
+export default openPopup;
