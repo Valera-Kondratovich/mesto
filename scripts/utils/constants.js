@@ -25,4 +25,12 @@ const _initialCards = [
   }
 ];
 
-export default _initialCards;
+
+const config = {
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-save',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+}
+
+export { _initialCards, config };

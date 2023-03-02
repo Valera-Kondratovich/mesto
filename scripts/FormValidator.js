@@ -1,24 +1,23 @@
 class FormValidator {
-  constructor(form) {
+  constructor(form, config) {
     this._form = form;
-    this._inputSelector = '.popup__input';
-    this._submitButtonSelector = '.popup__button-save';
-    this._inputErrorClass = 'popup__input_type_error';
-    this._errorClass = 'popup__error_visible';
-    this.enableValidation();
+    this._inputSelector = config.inputSelector;
+    this._submitButtonSelector = config.submitButtonSelector;
+    this._inputErrorClass = config.inputErrorClass;
+    this._errorClass = config.errorClass;
   }
 
   enableValidation = () => {
+    this._toggleButtonState();
+    this._setInputListeners();
     this._form.addEventListener('input', () => {
       this._toggleButtonState();
     })
-    this._toggleButtonState();
     this._form.addEventListener('reset', () => { //отключаем кнопку если форма невалидна при следующем открыти попапа
       setTimeout(() => {
         this._toggleButtonState();
       }, 0);
     });
-    this._setInputListeners();
 
   }
   _setInputListeners = () => {

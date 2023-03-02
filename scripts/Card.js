@@ -1,11 +1,17 @@
-import _initialCards from './script_arr_cards.js';
-import openPopup from './script.js';
+import { openPopup } from './utils/utils.js'
+
+const popupImage = document.querySelector('.popup_image');
+const popupDescription = popupImage.querySelector('.popup__description');
+const popupPicture = popupImage.querySelector('.popup__picture');
+
 
 class Card {
-  constructor(nameCard, urlCard) {
+  constructor(nameCard, urlCard, template) {
     this._nameCard = nameCard;
     this._urlCard = urlCard;
+    this._template = template;
   }
+
   _removeItem = () => {
     this._view.remove();
     this._removeEventListener();
@@ -27,26 +33,27 @@ class Card {
 
     this._clickToImage = this._view.querySelector('.elements__img');
     this._clickToImage.addEventListener('click', () => {
-      const _popupImage = document.querySelector('.popup_image');
 
-      const _popupDescription = _popupImage.querySelector('.popup__description');
-      const _popupPicture = _popupImage.querySelector('.popup__picture');
-      _popupDescription.textContent = this._clickToImage.alt;
-      _popupPicture.alt = this._clickToImage.alt;
-      _popupPicture.src = this._clickToImage.src;
-      openPopup(_popupImage);
+      popupDescription.textContent = this._clickToImage.alt;
+      popupPicture.alt = this._clickToImage.alt;
+      popupPicture.src = this._clickToImage.src;
+      openPopup(popupImage);
     })
   }
 
-  renderCard = (container, template) => {
-    this._view = template.cloneNode(true).children[0];
+  _getCardTemplate = () => {
+    this._view = this._template.cloneNode(true).children[0];
+  }
+
+  renderCard = () => {
+    this._getCardTemplate();
     this._image = this._view.querySelector('.elements__img');
     this._titleImage = this._view.querySelector('.elements__title');
     this._image.alt = this._nameCard;
     this._titleImage.textContent = this._nameCard;
     this._image.src = this._urlCard;
     this._addEventListeners();
-    return container.prepend(this._view);
+    return this._view;
   }
 }
 
