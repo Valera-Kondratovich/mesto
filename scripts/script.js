@@ -31,8 +31,10 @@ const container = document.querySelector('.elements');
 const template = document.querySelector('.template').content;
 
 //включаем валидацию форм
-const validProfileForm = new FormValidator(profileForm, config).enableValidation();
-const validCardForm = new FormValidator(cardForm, config).enableValidation();
+const validProfileForm = new FormValidator(profileForm, config);
+validProfileForm.enableValidation();
+const validCardForm = new FormValidator(cardForm, config);
+validCardForm.enableValidation();
 
 // функция возврата готовой карточки
 //функция возвращает заполненную карточку, но не вставляет в разметку
@@ -52,6 +54,7 @@ _initialCards.forEach(item => {
 // вешаем событие на клик кнопки редактирования профиля
 // и запускаем фалидацию формы
 buttonFormEdit.addEventListener('click', () => {
+  validProfileForm.removeValidationErrors();
   popupUserDescr.value = profileDescr.textContent;
   popupUserName.value = porfileName.textContent;
   openPopup(popupEdit);
@@ -60,6 +63,7 @@ buttonFormEdit.addEventListener('click', () => {
 // вешаем событие на клик кнопки добавления картинки
 // и запускаем фалидацию формы
 buttonGalleryAdd.addEventListener('click', function () {
+  validCardForm.removeValidationErrors();
   openPopup(popupGallery);
 });
 
@@ -80,6 +84,7 @@ function savePopupEdit(evt) {
   porfileName.textContent = popupUserName.value;
   profileDescr.textContent = popupUserDescr.value;
   closePopup(popupEdit);
+
 }
 
 //функция добавления новой карточки с картинкой
