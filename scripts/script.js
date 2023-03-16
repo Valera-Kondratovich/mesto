@@ -1,101 +1,86 @@
 // импортируем массив стартовых карточек,
 // скрипт вставки карточки на сайт,
 // скрипт валидации форм
+// импортируем конфиг
 import { _initialCards, config } from './utils/constants.js';
-import { openPopup, closePopup } from './utils/utils.js'
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
-
-const porfileName = document.querySelector('.profile__name'); //сохранил имя профиля
-const profileDescr = document.querySelector('.profile__description'); //сохранил описание профиля
+import Section from './Section.js';
+import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js'
+import UserInfo from './UserInfo.js';
 
 const buttonFormEdit = document.querySelector('.profile__button-edit'); //нашел кнопку редактирования профиля
-const popupEdit = document.querySelector('.popup_edit'); //нашел попап редактирования профиля
-
 const buttonGalleryAdd = document.querySelector('.profile__button-add'); // нашел кнопку добавления картинки
-const popupGallery = document.querySelector('.popup_add'); //попап добавления картинки
-
 const profileForm = document.forms['profile']; //нашел форму профиля
 const popupUserName = profileForm.elements['input-name']; //нашел поле ввода имени профиля в попап окне
 const popupUserDescr = profileForm.elements['input-descr']; //нашел поле ввода описания профиля в попап окне
-
-
 const cardForm = document.forms['gallery']; //нашел форму галлерея
-const inputHeaderGallery = cardForm.elements['input-img-name']; //поле ввода описания в попап окне
-const inputLinkGallery = cardForm.elements['input-img-url']; //поле ссылки на картинку в попап окне
 
-//место куда будем вставлять шаблон
-const container = document.querySelector('.elements');
-
-//сам шаблон
-const template = document.querySelector('.template').content;
+const userInfo = new UserInfo(config.profileName, config.profileDescription); //передали в конструктор класса UserInfo данные пользователя
 
 //включаем валидацию форм
 const validProfileForm = new FormValidator(profileForm, config);
-validProfileForm.enableValidation();
+validProfileForm.enableValidation(); //включаем валидацию на форме профиля
 const validCardForm = new FormValidator(cardForm, config);
-validCardForm.enableValidation();
+validCardForm.enableValidation(); //включаем валидацию на форме добавления карточки
 
-// функция возврата готовой карточки
-//функция возвращает заполненную карточку, но не вставляет в разметку
-function creatCard(nameCard, urlCard, template) {
-  const newCard = new Card(nameCard, urlCard, template).renderCard();
-  return newCard;
-};
-
-//запускаем метод render для заполнения сайта стартовыми карточками
-_initialCards.forEach(item => {
-  const name = item.name;
-  const link = item.link;
-  container.append(creatCard(name, link, template));
-});
-
-
-// вешаем событие на клик кнопки редактирования профиля
-// и запускаем фалидацию формы
 buttonFormEdit.addEventListener('click', () => {
   validProfileForm.removeValidationErrors();
-  popupUserDescr.value = profileDescr.textContent;
-  popupUserName.value = porfileName.textContent;
-  openPopup(popupEdit);
+  const getInfoUser = userInfo.getUserInfo();
+  popupUserName.value = getInfoUser.profileName; // заполнил инпуты значениями из класса UserInfo
+  popupUserDescr.value = getInfoUser.profileDescription;
+  openEditPopup.open();// отобразил попап
+  openEditPopup.setEventListeners() //навесил слушатели
 });
 
-// вешаем событие на клик кнопки добавления картинки
-// и запускаем фалидацию формы
-buttonGalleryAdd.addEventListener('click', function () {
-  validCardForm.removeValidationErrors();
-  openPopup(popupGallery);
+const openEditPopup = new PopupWithForm(config.popupEdit, {
+  submitForm: (formValues) => {
+    userInfo.setUserInfo(formValues.firstname, formValues.description)
+  }
+})
+
+//блок с работой карточки
+function openPopapClickToImage(popupImage, selectorImage) {
+  const openPopap = new PopupWithImage(popupImage, selectorImage);
+  openPopap.open();
+  openPopap.setEventListeners();
+}
+
+function finishCard(name, link) {
+  const card = new Card(name, link, config.template, {
+    handleCardClick: (selectorImage) => {
+      openPopapClickToImage(config.popupImage, selectorImage);
+    }
+  })
+  return card.renderCard()
+}
+
+// вставляем картинки из массива
+const cardsList = new Section({
+  renderer: (item) => {
+    const name = item.name;
+    const link = item.link;
+    const finalCard = finishCard(name, link); //возвращает заполненный шаблон
+    cardsList.addItem(finalCard); //вставляем заполненный шаблон на страницу
+  },
+}, config.container);
+cardsList.renderItems(_initialCards);
+
+//добавляем карточку после нажатия Сохранить
+const openGalleryPopup = new PopupWithForm(config.popupGallery, {
+  submitForm: (inputValues) => {
+    const finalCard = finishCard(inputValues.header, inputValues.link); //возвращает заполненный шаблон карточки
+    cardsList.addItem(finalCard); //вставляем заполненный шаблон на страницу
+  }
 });
 
-//вешаем событие отправки формы редактирования профиля
-profileForm.addEventListener('submit', savePopupEdit);
+buttonGalleryAdd.addEventListener('click', () => {
+  validCardForm.removeValidationErrors(); //запустил валидацию
+  openGalleryPopup.open() //открываем попап
 
-//вешаем событие отправки формы добавления карточки с картинкой
-cardForm.addEventListener('submit', saveFormGallery);
+});
 
-//функция отмены стандартного отправления формы
-function preventDefault(evt) {
-  evt.preventDefault();
-}
+openGalleryPopup.setEventListeners() //повесил слушатели на попап
 
-//функция сохранения редактирования профиля
-function savePopupEdit(evt) {
-  preventDefault(evt);
-  porfileName.textContent = popupUserName.value;
-  profileDescr.textContent = popupUserDescr.value;
-  closePopup(popupEdit);
-
-}
-
-//функция добавления новой карточки с картинкой
-// передаем это событие классу Card.
-// Класс Card возвращает заполненую картинку
-function saveFormGallery(evt) {
-  preventDefault(evt);
-  container.prepend(creatCard(inputHeaderGallery.value, inputLinkGallery.value, template))
-  evt.target.reset();//очищаю форму
-  closePopup(popupGallery); //скрываю попап окно добавления картинки
-}
-
-// экспортируем openPopup в Card для вызова фукции в нутри класса
 

@@ -1,15 +1,12 @@
-import { openPopup } from './utils/utils.js'
-
-const popupImage = document.querySelector('.popup_image');
-const popupDescription = popupImage.querySelector('.popup__description');
-const popupPicture = popupImage.querySelector('.popup__picture');
-
+import PopupWithImage from './PopupWithImage.js';
+import { config } from './utils/constants.js';
 
 class Card {
-  constructor(nameCard, urlCard, template) {
+  constructor(nameCard, urlCard, template, { handleCardClick }) {
     this._nameCard = nameCard;
     this._urlCard = urlCard;
-    this._template = template;
+    this._template = document.querySelector(template).content;
+    this._handleCardClick = handleCardClick;
   }
 
   _removeItem = () => {
@@ -31,13 +28,9 @@ class Card {
       this._removeItem();
     })
 
-    this._clickToImage = this._view.querySelector('.elements__img');
-    this._clickToImage.addEventListener('click', () => {
-
-      popupDescription.textContent = this._clickToImage.alt;
-      popupPicture.alt = this._clickToImage.alt;
-      popupPicture.src = this._clickToImage.src;
-      openPopup(popupImage);
+    this._selectorImage = this._view.querySelector('.elements__img');
+    this._selectorImage.addEventListener('click', () => {
+      this._handleCardClick(this._selectorImage)
     })
   }
 
@@ -45,7 +38,7 @@ class Card {
     this._view = this._template.cloneNode(true).children[0];
   }
 
-  renderCard = () => {
+  renderCard = () => { //возвращает заполненный шаблон но не вставляет в разметку
     this._getCardTemplate();
     this._image = this._view.querySelector('.elements__img');
     this._titleImage = this._view.querySelector('.elements__title');
@@ -56,5 +49,4 @@ class Card {
     return this._view;
   }
 }
-
 export default Card;
