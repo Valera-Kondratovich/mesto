@@ -5,18 +5,17 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Русские места</title>
 </head>
 
 <body class="page">
   <header class="header">
-    <img class="logo" src="./images/logo.svg" alt="логотип">
+    <img class="logo" src="<%=require('./images/logo.svg')%>" alt="логотип">
   </header>
 
   <main class="content">
     <section class="profile content__profile">
-      <img class="profile__avatar" src="./images/kusto.jpg" alt="аватар">
+      <img class="profile__avatar" src="<%=require('./images/kusto.jpg')%>" alt="аватар">
       <div class="profile__wrap">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -86,7 +85,6 @@
       <button class="elements__button-trash" type="button"></button>
     </div>
   </template>
-  <script type="module" src="./scripts/script.js"></script>
 </body>
 
 </html>

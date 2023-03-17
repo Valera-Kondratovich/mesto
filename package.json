@@ -1,0 +1,30 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "![avatar](./src/images/logo.png) ### Описание проекта * Проект позволяет добавлять фотографии, и выделять понравившиеся фотографии с помощью лайков. * Так же можно редактировать свой профиль, ФИО и описание. ### Описание примененных технологии: * Картинки скачаны с сайта https://unsplash.com/, все картинки имеют бесплатную лицензию * Картинки оптимизированы с помощью сайта https://tinypng.com/ * Использовалась методология БЭМ для наименования классов и создания файловой структуры * В проекте были применены такие свойства CSS как: Flex, позиционирование, media запросы, использование Grid * В проекте использовался javascript",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "autoprefixer": "^10.4.14",
+    "babel-loader": "^9.1.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.3",
+    "cssnano": "^5.1.15",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.4",
+    "postcss-loader": "^7.1.0",
+    "webpack": "^5.76.2",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.12.0"
+  },
+  "dependencies": {
+    "core-js": "^3.29.1"
+  }
+}

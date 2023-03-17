@@ -6,13 +6,12 @@ export default class PopupWithForm extends Popup {
     this._submitForm = submitForm; //это функция
     this._form = this._selector.querySelector('.popup__form'); //форма в попапе нашел
   }
-  open() {
-    super.open()
-  }
+
   _close() {
     super._close();
+    this._form.reset()
     this._form.removeEventListener('submit', () => {
-      this._form.reset()
+
     });
   }
 
@@ -27,7 +26,7 @@ export default class PopupWithForm extends Popup {
     // возвращаем объект значений
     return this._formValues;
   }
-  
+
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener('submit', (evt) => {

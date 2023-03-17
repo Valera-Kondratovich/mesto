@@ -2,13 +2,15 @@
 // скрипт вставки карточки на сайт,
 // скрипт валидации форм
 // импортируем конфиг
+import '../pages/index.css' //импортирую css для webpack
+
 import { _initialCards, config } from './utils/constants.js';
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-import Section from './Section.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm.js'
-import UserInfo from './UserInfo.js';
+import Card from './components/Card.js';
+import FormValidator from './components/FormValidator.js';
+import Section from './components/Section.js';
+import PopupWithImage from './components/PopupWithImage.js';
+import PopupWithForm from './components/PopupWithForm.js'
+import UserInfo from './components/UserInfo.js';
 
 const buttonFormEdit = document.querySelector('.profile__button-edit'); //нашел кнопку редактирования профиля
 const buttonGalleryAdd = document.querySelector('.profile__button-add'); // нашел кнопку добавления картинки
@@ -25,20 +27,21 @@ validProfileForm.enableValidation(); //включаем валидацию на 
 const validCardForm = new FormValidator(cardForm, config);
 validCardForm.enableValidation(); //включаем валидацию на форме добавления карточки
 
+const openEditPopup = new PopupWithForm(config.popupEdit, {
+  submitForm: (formValues) => {
+    userInfo.setUserInfo(formValues.firstname, formValues.description)
+  }
+})
+
 buttonFormEdit.addEventListener('click', () => {
   validProfileForm.removeValidationErrors();
   const getInfoUser = userInfo.getUserInfo();
   popupUserName.value = getInfoUser.profileName; // заполнил инпуты значениями из класса UserInfo
   popupUserDescr.value = getInfoUser.profileDescription;
   openEditPopup.open();// отобразил попап
-  openEditPopup.setEventListeners() //навесил слушатели
 });
+openEditPopup.setEventListeners() //навесил слушатели
 
-const openEditPopup = new PopupWithForm(config.popupEdit, {
-  submitForm: (formValues) => {
-    userInfo.setUserInfo(formValues.firstname, formValues.description)
-  }
-})
 
 //блок с работой карточки
 function openPopapClickToImage(popupImage, selectorImage) {

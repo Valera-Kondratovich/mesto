@@ -1,5 +1,5 @@
 import PopupWithImage from './PopupWithImage.js';
-import { config } from './utils/constants.js';
+import { config } from '../utils/constants.js';
 
 class Card {
   constructor(nameCard, urlCard, template, { handleCardClick }) {

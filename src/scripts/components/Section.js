@@ -1,6 +1,5 @@
 export default class Section {
   constructor({ renderer }, selector) {
-    // this._initialArray = items; //массив
     this._renderer = renderer; //функция
     this._selector = document.querySelector(selector); //куда вставляем
   }
