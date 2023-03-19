@@ -4,19 +4,16 @@ export default class PopupWithForm extends Popup {
   constructor(selector, { submitForm }) {
     super(selector);
     this._submitForm = submitForm; //это функция
-    this._form = this._selector.querySelector('.popup__form'); //форма в попапе нашел
+    this._form = this._popupElement.querySelector('.popup__form'); //форма в попапе нашел
+    this._inputList = this._popupElement.querySelectorAll('.popup__input');
   }
 
-  _close() {
-    super._close();
+  close() {
+    super.close();
     this._form.reset()
-    this._form.removeEventListener('submit', () => {
-
-    });
   }
 
   _getInputValues() {
-    this._inputList = this._selector.querySelectorAll('.popup__input');
     // создаём пустой объект
     this._formValues = {};
     // добавляем в этот объект значения всех полей
@@ -32,7 +29,7 @@ export default class PopupWithForm extends Popup {
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault()
       this._submitForm(this._getInputValues());
-      this._close()
+      this.close()
     })
   }
 }

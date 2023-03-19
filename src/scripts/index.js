@@ -27,7 +27,7 @@ validProfileForm.enableValidation(); //включаем валидацию на 
 const validCardForm = new FormValidator(cardForm, config);
 validCardForm.enableValidation(); //включаем валидацию на форме добавления карточки
 
-const openEditPopup = new PopupWithForm(config.popupEdit, {
+const popupEditProfile = new PopupWithForm(config.popupEdit, {
   submitForm: (formValues) => {
     userInfo.setUserInfo(formValues.firstname, formValues.description)
   }
@@ -38,52 +38,48 @@ buttonFormEdit.addEventListener('click', () => {
   const getInfoUser = userInfo.getUserInfo();
   popupUserName.value = getInfoUser.profileName; // заполнил инпуты значениями из класса UserInfo
   popupUserDescr.value = getInfoUser.profileDescription;
-  openEditPopup.open();// отобразил попап
+  popupEditProfile.open();// отобразил попап
 });
-openEditPopup.setEventListeners() //навесил слушатели
+popupEditProfile.setEventListeners() //навесил слушатели
 
 
 //блок с работой карточки
-function openPopapClickToImage(popupImage, selectorImage) {
-  const openPopap = new PopupWithImage(popupImage, selectorImage);
-  openPopap.open();
-  openPopap.setEventListeners();
-}
 
-function finishCard(name, link) {
+const popupImage = new PopupWithImage(config.popupImageSelector);
+
+function createCard(name, link) {
   const card = new Card(name, link, config.template, {
     handleCardClick: (selectorImage) => {
-      openPopapClickToImage(config.popupImage, selectorImage);
+      popupImage.open(selectorImage);
     }
   })
   return card.renderCard()
 }
+popupImage.setEventListeners();
 
 // вставляем картинки из массива
 const cardsList = new Section({
   renderer: (item) => {
     const name = item.name;
     const link = item.link;
-    const finalCard = finishCard(name, link); //возвращает заполненный шаблон
+    const finalCard = createCard(name, link); //возвращает заполненный шаблон
     cardsList.addItem(finalCard); //вставляем заполненный шаблон на страницу
   },
 }, config.container);
 cardsList.renderItems(_initialCards);
 
 //добавляем карточку после нажатия Сохранить
-const openGalleryPopup = new PopupWithForm(config.popupGallery, {
+const popupAddCard = new PopupWithForm(config.popupGallery, {
   submitForm: (inputValues) => {
-    const finalCard = finishCard(inputValues.header, inputValues.link); //возвращает заполненный шаблон карточки
+    const finalCard = createCard(inputValues.header, inputValues.link); //возвращает заполненный шаблон карточки
     cardsList.addItem(finalCard); //вставляем заполненный шаблон на страницу
   }
 });
 
 buttonGalleryAdd.addEventListener('click', () => {
   validCardForm.removeValidationErrors(); //запустил валидацию
-  openGalleryPopup.open() //открываем попап
-
+  popupAddCard.open() //открываем попап
 });
-
-openGalleryPopup.setEventListeners() //повесил слушатели на попап
+popupAddCard.setEventListeners() //повесил слушатели на попап
 
 

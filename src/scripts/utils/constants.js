@@ -34,7 +34,7 @@ const config = {
   errorClass: 'popup__error_visible',
   profileName: '.profile__name', //селектор имени профиля на странице
   profileDescription: '.profile__description', //селектор описание профиля на странице
-  popupImage: '.popup_image',  //попап самой картинки
+  popupImageSelector: '.popup_image',  //попап самой картинки
   popupEdit: '.popup_edit',   //попап редактирования профиля
   popupGallery: '.popup_add'  //попап добавления картинки
 }

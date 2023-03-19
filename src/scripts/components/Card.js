@@ -1,7 +1,4 @@
-import PopupWithImage from './PopupWithImage.js';
-import { config } from '../utils/constants.js';
-
-class Card {
+export default class Card {
   constructor(nameCard, urlCard, template, { handleCardClick }) {
     this._nameCard = nameCard;
     this._urlCard = urlCard;
@@ -49,4 +46,4 @@ class Card {
     return this._view;
   }
 }
-export default Card;
+
