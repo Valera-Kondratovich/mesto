@@ -15,11 +15,13 @@
 
   <main class="content">
     <section class="profile content__profile">
-      <img class="profile__avatar" src="<%=require('./images/kusto.jpg')%>" alt="аватар">
+      <button class="profile__avatar-button" type="button">
+        <img class="profile__avatar" src="" alt="аватар">
+      </button>
       <div class="profile__wrap">
         <div class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <p class="profile__description">Исследователь океана</p>
+          <h1 class="profile__name"></h1>
+          <p class="profile__description"></p>
         </div>
         <button class="profile__button-edit" type="button"></button>
       </div>
@@ -37,10 +39,10 @@
       <div class="popup__content">
         <form class="popup__form popup__profile" name="profile" novalidate>
           <h2 class="popup__title">Редактировать профиль</h2>
-          <input id="input-name" class="popup__input popup__input_name" type="text" name="firstname"
+          <input id="input-name" class="popup__input popup__input_name" type="text" name="name"
             placeholder="Введите Ваше Имя" required minlength="2" maxlength="40">
           <span id="input-name-error" class="popup__error"></span>
-          <input id="input-descr" class="popup__input popup__input_description" type="text" name="description"
+          <input id="input-descr" class="popup__input popup__input_description" type="text" name="about"
             placeholder="О себе" required minlength="2" maxlength="200">
           <span id="input-descr-error" class="popup__error"></span>
           <button class="popup__button-save" type="submit">Сохранить</button>
@@ -55,13 +57,40 @@
       <div class="popup__content">
         <form class="popup__form popup__gallery" name="gallery" novalidate>
           <h2 class="popup__title">Новое место</h2>
-          <input id="input-img-name" class="popup__input popup__input_header" type="text" name="header"
+          <input id="input-img-name" class="popup__input popup__input_header" type="text" name="name"
             placeholder="Имя картинки" required minlength="2" maxlength="30">
           <span id="input-img-name-error" class="popup__error"></span>
           <input id="input-img-url" class="popup__input popup__input_link" type="url" name="link"
             placeholder="Ссылка на картинку" required>
           <span id="input-img-url-error" class="popup__error"></span>
           <button class="popup__button-save" type="submit">Сохранить</button>
+          <button class="popup__button-close" type="button"></button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup popup_avatar">
+    <div class="popup__body">
+      <div class="popup__content">
+        <form class="popup__form popup__avatar" name="avatar" novalidate>
+          <h2 class="popup__title">Обновить аватар</h2>
+          <input id="input-avatar" class="popup__input popup__input_avatar" type="url" name="avatar"
+            placeholder="Ссылка на аватар" required>
+          <span id="input-avatar-error" class="popup__error"></span>
+          <button class="popup__button-save" type="submit">Сохранить</button>
+          <button class="popup__button-close" type="button"></button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup popup_trash">
+    <div class="popup__body">
+      <div class="popup__content">
+        <form class="popup__form popup__trash" name="trash" novalidate>
+          <h2 class="popup__title">Вы уверены?</h2>
+          <button class="popup__button-save" type="submit">Да</button>
           <button class="popup__button-close" type="button"></button>
         </form>
       </div>
@@ -80,7 +109,10 @@
       <img class="elements__img" src="#" alt="#">
       <div class="elements__group">
         <h2 class="elements__title"></h2>
-        <button class="elements__button-like" type="button"></button>
+        <div class="elements__wrap">
+          <button class="elements__button-like" type="button"></button>
+          <span class="elements__count"></span>
+        </div>
       </div>
       <button class="elements__button-trash" type="button"></button>
     </div>

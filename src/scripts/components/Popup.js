@@ -1,6 +1,7 @@
 export default class Popup {
   constructor(selector) {
     this._popupElement = document.querySelector(selector); //селектор попап картинки
+    this._selectorButton = this._popupElement.querySelector('.popup__button-save') //селектор кнопки сохранения
     this._handleEscClose = this._handleEscClose.bind(this)
   }
 
@@ -25,5 +26,9 @@ export default class Popup {
       if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__button-close'))
         this.close()
     })
+  }
+  renderLoading(isLoading) {
+    if (isLoading) { this._selectorButton.textContent = 'Сохранение...' }
+    else { this._selectorButton.textContent = 'Сохранить' }
   }
 }

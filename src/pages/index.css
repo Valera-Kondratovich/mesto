@@ -11,6 +11,7 @@
 @import url(../bloks/content/__profile/content__profile.css);
 /* -----секция profile-------*/
 @import url(../bloks/profile/profile.css);
+@import url(../bloks/profile/__avatar-button/profile__avatar-button.css);
 @import url(../bloks/profile/__avatar/profile__avatar.css);
 @import url(../bloks/profile/__wrap/profile__wrap.css);
 @import url(../bloks/profile/__info/profile__info.css);
@@ -24,6 +25,7 @@
 @import url(../bloks/elements/__img/elements__img.css);
 @import url(../bloks/elements/__group/elements__group.css);
 @import url(../bloks/elements/__title/elements__title.css);
+@import url(../bloks/elements/__wrap/elements__wrap.css);
 @import url(../bloks/elements/__button-like/elements__button-like.css);
 @import url(../bloks/elements/__button-like/_active/elements__button-like_active.css);
 @import url(../bloks/elements/__button-trash/elements__button-trash.css);
