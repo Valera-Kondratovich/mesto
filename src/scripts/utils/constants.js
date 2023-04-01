@@ -11,7 +11,7 @@ const config = {
   popupImageSelector: '.popup_image',  //селектор попап самой картинки
   popupEdit: '.popup_edit',   //селектор попап редактирования профиля
   popupGallery: '.popup_add',  //селектор попап добавления картинки
-  popupTrash: '.popup_trash',   // селектор попап корзины
+  popupConfirmation: '.popup_trash',   // селектор попап корзины
   popupAvatar: '.popup_avatar', //селектор попап аватара
   urlApi: 'https://mesto.nomoreparties.co/v1/cohort-62', //адрес сервера где храняться карточки
   tokenApi: '9792b8e2-d3a5-4eb4-90af-3d3354b4d9c2'                // токен пользователя

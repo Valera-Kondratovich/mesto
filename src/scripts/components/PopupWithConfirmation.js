@@ -1,6 +1,6 @@
 import Popup from './Popup.js';
 
-export default class PopupWithTrash extends Popup {
+export default class PopupWithConfirmation extends Popup {
   constructor(selector, { submitForm }) {
     super(selector);
     this._submitForm = submitForm; //это функция

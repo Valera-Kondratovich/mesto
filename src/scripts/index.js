@@ -8,7 +8,7 @@ import PopupWithImage from './components/PopupWithImage.js';
 import PopupWithForm from './components/PopupWithForm.js'
 import UserInfo from './components/UserInfo.js';
 import Api from './components/Api.js';
-import PopupWithTrash from './components/PopupWithTrash.js';
+import PopupWithConfirmation from './components/PopupWithConfirmation.js';
 import PoputWithAvatar from './components/PoputWithAvatar.js';
 
 const buttonFormEdit = document.querySelector('.profile__button-edit'); //нашел кнопку редактирования профиля
@@ -103,7 +103,7 @@ api.getAllNeedData() // делаю запрос на получение данн
     }, config.container);
 
     //создаю класс который будет отрабатывать подтверждение удаления карточки
-    const popupTrash = new PopupWithTrash(config.popupTrash, {
+    const popupConfirmation = new PopupWithConfirmation(config.popupConfirmation, {
       submitForm: (idImage, templaitCard) => {
         api.delCard(idImage)
           .then(() => {
@@ -112,7 +112,7 @@ api.getAllNeedData() // делаю запрос на получение данн
           .catch((err) => console.log(err));
       }
     });
-    popupTrash.setEventListeners()
+    popupConfirmation.setEventListeners()
 
     arrayDateCards.forEach((item) => {
       cardsList.renderItems(item)
@@ -140,7 +140,7 @@ api.getAllNeedData() // делаю запрос на получение данн
           }
         },
         handleDeleteIconClick: (idImage, templaitCard) => {
-          popupTrash.open(idImage, templaitCard); //открывается окно подтверждения
+          popupConfirmation.open(idImage, templaitCard); //открывается окно подтверждения
         }
       }
       );
