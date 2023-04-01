@@ -1,6 +1,5 @@
-//
 export default class Card {
-  constructor(data, template, userId, { handleCardClick }, { handleLikeClick }, { handleDeleteIconClick }) {
+  constructor(data, template, userId, { handleCardClick, handleLikeClick, handleDeleteIconClick }) {
     this._nameCard = data.name;
     this._urlCard = data.link;
     this._likesArr = data.likes;  // массив лайков
@@ -10,7 +9,6 @@ export default class Card {
     this._handleLikeClick = handleLikeClick; //функция клика по лайку
     this._handleCardClick = handleCardClick; //функция клика по картинке
     this._handleDeleteIconClick = handleDeleteIconClick //функция клика по корзине
-
     this._template = document.querySelector(template).content;
     this._view = this._template.cloneNode(true).children[0];
     this._buttonLike = this._view.querySelector('.elements__button-like'); //селектор лайка
@@ -18,28 +16,21 @@ export default class Card {
   }
 
   _addEventListeners = () => {
-    // this._buttonLike = this._view.querySelector('.elements__button-like'); //селектор лайка
-
     this._buttonLike.addEventListener('click', () => {
       this._handleLikeClick(this._idImage, this._likesArr)
-
-      // this._buttonLike.classList.toggle('elements__button-like_active')
     });
 
     this._buttonTrash.addEventListener('click', () => {
-
       this._handleDeleteIconClick(this._idImage, this._view)
-
-
-    })
+    });
 
     this._selectorImage = this._view.querySelector('.elements__img');
     this._selectorImage.addEventListener('click', () => {
       this._handleCardClick(this._selectorImage)
-    })
+    });
   }
-  setLikesCount = (dataLikes, dataIdUser) => {
 
+  setLikesCount = (dataLikes, dataIdUser) => {
     this._likesArr = dataLikes; // обновляю массив лайков для следующего раза
     this._likes = this._view.querySelector('.elements__count');
     if (this._likesArr.length > 0) {    //если длина массива лайков больше 0
@@ -49,7 +40,6 @@ export default class Card {
     else {
       this._likes.textContent = " "; //иначе добавить пробел в разметку массива
       this.isCardLiked(this._likesArr, dataIdUser)
-
     }
   }
 
@@ -66,13 +56,9 @@ export default class Card {
     this._view.remove();
     this._removeEventListener();
   }
+
   _removeEventListener = () => {
     this._buttonTrash.removeEventListener('click', this._removeItem)
-  }
-
-
-  _getCardTemplate = () => {
-    // this._view = this._template.cloneNode(true).children[0];
   }
 
   _ownerVerification = () => {
@@ -83,7 +69,6 @@ export default class Card {
   }
 
   renderCard = () => { //возвращает заполненный шаблон но не вставляет в разметку
-    // this._getCardTemplate();
     this._image = this._view.querySelector('.elements__img');
     this._titleImage = this._view.querySelector('.elements__title');
     this._image.alt = this._nameCard;
