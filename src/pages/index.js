@@ -28,7 +28,6 @@ const enableValidation = (config) => {
     const formName = formElement.getAttribute('name');
     // вот тут в объект записываем под именем формы
     formValidators[formName] = validator;
-    console.log(formValidators);
     validator.enableValidation();
   });
 };
