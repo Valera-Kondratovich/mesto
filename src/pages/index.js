@@ -1,15 +1,14 @@
-import '../pages/index.css' //импортирую css для webpack
+import './index.css' //импортирую css для webpack
 
-import config from './utils/constants.js';
-import Card from './components/Card.js';
-import FormValidator from './components/FormValidator.js';
-import Section from './components/Section.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import PopupWithForm from './components/PopupWithForm.js'
-import UserInfo from './components/UserInfo.js';
-import Api from './components/Api.js';
-import PopupWithConfirmation from './components/PopupWithConfirmation.js';
-import PoputWithAvatar from './components/PoputWithAvatar.js';
+import config from '../scripts/utils/constants.js';
+import Card from '../scripts/components/Card.js';
+import FormValidator from '../scripts/components/FormValidator.js';
+import Section from '../scripts/components/Section.js';
+import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import PopupWithForm from '../scripts/components/PopupWithForm.js'
+import UserInfo from '../scripts/components/UserInfo.js';
+import Api from '../scripts/components/Api.js';
+import PopupWithConfirmation from '../scripts/components/PopupWithConfirmation.js';
 
 const buttonFormEdit = document.querySelector('.profile__button-edit'); //нашел кнопку редактирования профиля
 const buttonGalleryAdd = document.querySelector('.profile__button-add'); // нашел кнопку добавления картинки
@@ -17,16 +16,24 @@ const buttonAvatarAdd = document.querySelector('.profile__avatar-button');
 const profileForm = document.forms['profile']; //нашел форму профиля
 const popupUserName = profileForm.elements['input-name']; //нашел поле ввода имени профиля в попап окне
 const popupUserDescr = profileForm.elements['input-descr']; //нашел поле ввода описания профиля в попап окне
-const cardForm = document.forms['gallery']; //нашел форму галлерея
-const avatarForm = document.forms['avatar']; //нашел форму аватар
 
-//включаем валидацию форм
-const validProfileForm = new FormValidator(profileForm, config);
-validProfileForm.enableValidation(); //включаем валидацию на форме профиля
-const validCardForm = new FormValidator(cardForm, config);
-validCardForm.enableValidation(); //включаем валидацию на форме добавления карточки
-const validAvatarForm = new FormValidator(avatarForm, config);
-validAvatarForm.enableValidation(); //включаем валидацию на форме профиля
+const formValidators = {}
+
+// Включение валидации
+const enableValidation = (config) => {
+  const formList = Array.from(document.forms) //нашли все формы на странице
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(formElement, config)
+    // получаем данные из атрибута `name` у формы
+    const formName = formElement.getAttribute('name');
+    // вот тут в объект записываем под именем формы
+    formValidators[formName] = validator;
+    console.log(formValidators);
+    validator.enableValidation();
+  });
+};
+
+enableValidation(config); //включаем валидацию
 
 const userInfo = new UserInfo(config.profileName, config.profileDescription, config.profileAvatar); //передали в конструктор класса UserInfo селекторы пользователя
 
@@ -36,7 +43,8 @@ const popupEditProfile = new PopupWithForm(config.popupEdit, {
     popupEditProfile.renderLoading(true);  //метод процесса загрузки
     api.patchUserData(formValues)
       .then((data) => {
-        userInfo.setUserInfo(data.name, data.about)
+        userInfo.setUserInfo(data.name, data.about);
+        popupEditProfile.close();
       })
       .catch((err) => console.log(err))
       .finally(() => { popupEditProfile.renderLoading(false); })
@@ -45,7 +53,7 @@ const popupEditProfile = new PopupWithForm(config.popupEdit, {
 
 //кнопка открытия попап редактирования профиля
 buttonFormEdit.addEventListener('click', () => {
-  validProfileForm.removeValidationErrors();
+  formValidators.profile.removeValidationErrors();
   const getInfoUser = userInfo.getUserInfo();
   popupUserName.value = getInfoUser.profileName; // заполнил инпуты значениями из класса UserInfo
   popupUserDescr.value = getInfoUser.profileDescription;
@@ -67,12 +75,13 @@ const api = new Api({
 });
 
 // класс изменения аватар
-const popupAvatar = new PoputWithAvatar(config.popupAvatar, {
+const popupAvatar = new PopupWithForm(config.popupAvatar, {
   submitForm: (InputValues) => {
     popupAvatar.renderLoading(true);
     api.patchUserAvatar(InputValues)
       .then(() => {
-        userInfo.setUserAvatar(InputValues.avatar)
+        userInfo.setUserAvatar(InputValues.avatar);
+        popupAvatar.close();
       })
       .catch((err) => console.log(err))
       .finally(() => popupAvatar.renderLoading(false))
@@ -80,7 +89,7 @@ const popupAvatar = new PoputWithAvatar(config.popupAvatar, {
 })
 
 buttonAvatarAdd.addEventListener('click', () => {
-  validAvatarForm.removeValidationErrors()
+  formValidators.avatar.removeValidationErrors();
   popupAvatar.open();
 })
 popupAvatar.setEventListeners()
@@ -108,15 +117,13 @@ api.getAllNeedData() // делаю запрос на получение данн
         api.delCard(idImage)
           .then(() => {
             templaitCard.remove();
+            popupConfirmation.close();
           })
           .catch((err) => console.log(err));
       }
     });
     popupConfirmation.setEventListeners()
-
-    arrayDateCards.forEach((item) => {
-      cardsList.renderItems(item)
-    });
+    cardsList.renderItems(arrayDateCards)
 
     function createCard(data) {
       const card = new Card(data, config.template, userId, {
@@ -140,7 +147,7 @@ api.getAllNeedData() // делаю запрос на получение данн
           }
         },
         handleDeleteIconClick: (idImage, templaitCard) => {
-          popupConfirmation.open(idImage, templaitCard); //открывается окно подтверждения
+          popupConfirmation.open(idImage, templaitCard); //открывается окно подтверждения удаления
         }
       }
       );
@@ -154,6 +161,7 @@ api.getAllNeedData() // делаю запрос на получение данн
         postCardData.then((data) => {
           const finalCard = createCard(data); //возвращает заполненный шаблон карточки
           cardsList.addItem(finalCard); //вставляем заполненный шаблон на страницу
+          popupAddCard.close();
         })
           .catch((err) => console.log(err))
           .finally(() => popupAddCard.renderLoading(false));
@@ -161,7 +169,7 @@ api.getAllNeedData() // делаю запрос на получение данн
     });
 
     buttonGalleryAdd.addEventListener('click', () => {
-      validCardForm.removeValidationErrors(); //запустил валидацию
+      formValidators.gallery.removeValidationErrors(); //удаляю ошибки перед открытием попап
       popupAddCard.open() //открываем попап
     });
     popupAddCard.setEventListeners() //повесил слушатели на попап

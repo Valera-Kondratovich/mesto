@@ -13,6 +13,7 @@ export default class Card {
     this._view = this._template.cloneNode(true).children[0];
     this._buttonLike = this._view.querySelector('.elements__button-like'); //селектор лайка
     this._buttonTrash = this._view.querySelector('.elements__button-trash'); //селектор кнопки корзины
+    this._likes = this._view.querySelector('.elements__count');
   }
 
   _addEventListeners = () => {
@@ -32,7 +33,7 @@ export default class Card {
 
   setLikesCount = (dataLikes, dataIdUser) => {
     this._likesArr = dataLikes; // обновляю массив лайков для следующего раза
-    this._likes = this._view.querySelector('.elements__count');
+
     if (this._likesArr.length > 0) {    //если длина массива лайков больше 0
       this._likes.textContent = this._likesArr.length;
       this.isCardLiked(this._likesArr, dataIdUser) //то вставить в разметку длину массива

@@ -5,6 +5,8 @@ class FormValidator {
     this._submitButtonSelector = config.submitButtonSelector;
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
+    this._inputLists = Array.from(this._form.querySelectorAll(this._inputSelector));
+    this._buttonSubmit = this._form.querySelector(this._submitButtonSelector);
   }
 
   enableValidation = () => {
@@ -21,8 +23,7 @@ class FormValidator {
   }
 
   _setInputListeners = () => {
-    const _inputLists = Array.from(this._form.querySelectorAll(this._inputSelector));
-    _inputLists.forEach((inputElement) => {
+    this._inputLists.forEach((inputElement) => {
       inputElement.addEventListener('input', (event) => {
         this._isValid(event);
       });
@@ -54,19 +55,14 @@ class FormValidator {
   };
 
   _toggleButtonState = () => {
-    const _buttonSubmit = this._form.querySelector(this._submitButtonSelector);
     const _isFormValid = this._form.checkValidity();
-    _buttonSubmit.disabled = !_isFormValid;
+    this._buttonSubmit.disabled = !_isFormValid;
   }
 
   removeValidationErrors = () => {
-    const inputLists = Array.from(document.querySelectorAll(this._inputSelector));
-    inputLists.forEach((inputElement) => {
-      inputElement.classList.remove(this._inputErrorClass);
+    this._inputLists.forEach((inputElement) => {
+      this._hideInputError(inputElement)
       inputElement.value = '';
-      const error = document.querySelector(`#${inputElement.id}-error`);
-      error.classList.remove(this._errorClass);
-      error.textContent = '';
     });
   }
 }

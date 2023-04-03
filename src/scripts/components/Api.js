@@ -4,32 +4,21 @@ export default class Api {
     this._headers = config.headers;
   }
 
+  _request(url, options) {
+    return fetch(url, options).then(this._checkResponse)
+  }
+
   _getAllCardsData() {
-    return fetch(`${this._url}/cards`, {
+    return this._request(`${this._url}/cards`, {
       method: 'GET',
       headers: this._headers
-    }).then((res) => {
-      if (res.ok) {
-        return res.json()
-      }
-      else {
-        return Promise.reject(`Произошла ошибка: ${res.status}`);
-      }
-
     })
   }
 
   _getUserData() {
-    return fetch(`${this._url}/users/me`, {
+    return this._request(`${this._url}/users/me`, {
       method: 'GET',
       headers: this._headers
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      else {
-        return Promise.reject(`Произошла ошибка: ${res.status}`)
-      }
     })
   }
 
@@ -38,96 +27,57 @@ export default class Api {
   }
 
   patchUserData(data) {
-    return fetch(`${this._url}/users/me`, {
+    return this._request(`${this._url}/users/me`, {
       method: 'PATCH',
       body: JSON.stringify(data),
       headers: this._headers,
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        else {
-          return Promise.reject(`Произошла ошибка: ${res.status}`)
-        }
-      })
   }
 
   postCardData(data) {
-    return fetch(`${this._url}/cards`, {
+    return this._request(`${this._url}/cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify(data)
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json()
-        }
-        else {
-          return Promise.reject(`Произошла ошибка: ${res.status}`)
-        }
-      })
   }
 
   putLike(idImage) {
-    return fetch(`${this._url}/cards/${idImage}/likes`, {
+    return this._request(`${this._url}/cards/${idImage}/likes`, {
       method: 'PUT',
       headers: this._headers,
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json()
-        }
-        else {
-          return Promise.reject(`Произошла ошибка: ${res.status}`)
-        }
-      })
   }
 
   delLike(idImage) {
-    return fetch(`${this._url}/cards/${idImage}/likes`, {
+    return this._request(`${this._url}/cards/${idImage}/likes`, {
       method: 'DELETE',
       headers: this._headers,
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json()
-        }
-        else {
-          return Promise.reject(`Произошла ошибка: ${res.status}`)
-        }
-      })
   }
 
   delCard(idImage) {
-    return fetch(`${this._url}/cards/${idImage}`, {
+    return this._request(`${this._url}/cards/${idImage}`, {
       method: 'DELETE',
       headers: this._headers,
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json()
-        }
-        else {
-          return Promise.reject(`Произошла ошибка: ${res.status}`)
-        }
-      })
   }
 
   patchUserAvatar(urlAvatar) {
-    return fetch(`${this._url}/users/me/avatar`, {
+    return this._request(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify(urlAvatar),
+      body: JSON.stringify(urlAvatar)
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json()
-        }
-        else {
-          return Promise.reject(`Произошла ошибка: ${res.status}`)
-        }
-      })
+  }
+
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json()
+    }
+    else {
+      return Promise.reject(`Произошла ошибка: ${res.status}`)
+    }
   }
 }
 
