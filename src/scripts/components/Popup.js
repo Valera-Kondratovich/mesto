@@ -1,7 +1,7 @@
 export default class Popup {
   constructor(selector) {
     this._popupElement = document.querySelector(selector); //селектор попап картинки
-    this._handleEscClose = this._handleEscClose.bind(this)
+    this._handleEscClose = this._handleEscClose.bind(this) //происходит потеря контекста так как функция handleEscClose передается как колбэк
   }
 
   open() {
